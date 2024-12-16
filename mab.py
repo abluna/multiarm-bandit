@@ -190,13 +190,12 @@ def create_synthetic_sample(row_count=10000):
 
     return Segment_df[cols_of_interest]
     
-def add_conversion_rates(df, seg_cols=None, segments=None, assign_variant=True, print_diagnostics=True):
+def add_conversion_rates(df, seg_cols=None, segments=None, all_combos_weights=None, assign_variant=True, print_diagnostics=True):
     
     import numpy as np
     import pandas as pd
     
     pd_weights = get_pd_weights_long(segments=segments)
-    all_combos_weights = create_all_combo_weights()
 
     variant_names = [
             'Control',
@@ -244,7 +243,7 @@ def add_conversion_rates(df, seg_cols=None, segments=None, assign_variant=True, 
 
     return df[cols_to_return]
      
-def assignment_with_optimization(df, prior_performance_scores=None,seg_cols=None, opt_target_size=0.05, learning_weight=5):
+def assignment_with_optimization(df, prior_performance_scores=None,seg_cols=None, opt_target_size=0.05, learning_weight=1):
 
     import numpy as np
     import pandas as pd
@@ -264,24 +263,18 @@ def assignment_with_optimization(df, prior_performance_scores=None,seg_cols=None
     Segment_df_step2_control['variant_assignment'] = "Control"
 
     ###  Create routine for assigning weights to each variant ###
-    for seg_i in range(len(seg_cols)):
-        cur_prior_performance_scores = prior_performance_scores[seg_i].droplevel(1, axis=1)
-        cur_prior_performance_scores[seg_cols[seg_i]] = cur_prior_performance_scores.index
-        cur_prior_performance_scores.index.name = 'MyIndex'
-        Segment_df_step2_target_opt = Segment_df_step2_target_opt.merge(cur_prior_performance_scores, how='left', left_on=seg_cols[seg_i], right_on=seg_cols[seg_i], suffixes = (None, "_" + seg_cols[seg_i]))
-
-    ## Let's create the weights for each row and each variant
-    variant_search = ["Variant_a", "Variant_b", "Variant_c"]
-    for i in range(3):
-        cols_of_interest = [col for col in Segment_df_step2_target_opt.columns if variant_search[i] in col]
-        Segment_df_step2_target_opt[variant_search[i] + '_sum'] = Segment_df_step2_target_opt[cols_of_interest].sum(axis=1) ** learning_weight
+    Segment_df_step2_target_opt = Segment_df_step2_target_opt.merge(prior_performance_scores, how='left', on=["gender","age","income","buyer","region","area","parent"])
 
     ## Turn it into a share
-    Segment_df_step2_target_opt['final_denominator'] = Segment_df_step2_target_opt[['Variant_a_sum','Variant_b_sum','Variant_c_sum']].sum(axis=1)
-    for i in range(3):
-        Segment_df_step2_target_opt[variant_search[i] + '_share'] = Segment_df_step2_target_opt[variant_search[i] + '_sum'] / Segment_df_step2_target_opt['final_denominator']
+    variant_col_names = ['Variant_a_performance','Variant_b_performance','Variant_c_performance']
+    Segment_df_step2_target_opt[variant_col_names] = Segment_df_step2_target_opt[variant_col_names] ** learning_weight
 
-    Segment_df_step2_target_opt['variant_assignment'] = Segment_df_step2_target_opt.apply(lambda row: np.random.choice(['Variant A', 'Variant B', 'Variant C'], p=row[['Variant_a_share','Variant_b_share','Variant_c_share']]), axis=1)
+    Segment_df_step2_target_opt['final_denominator'] = Segment_df_step2_target_opt[variant_col_names].sum(axis=1)
+
+    for i in range(3):
+        Segment_df_step2_target_opt[variant_col_names[i] + '_share'] = Segment_df_step2_target_opt[variant_col_names[i]] / Segment_df_step2_target_opt['final_denominator']
+
+    Segment_df_step2_target_opt['variant_assignment'] = Segment_df_step2_target_opt.apply(lambda row: np.random.choice(['Variant A', 'Variant B', 'Variant C'], p=row[['Variant_a_performance_share','Variant_b_performance_share','Variant_c_performance_share']]), axis=1)
 
     ## join the three tables
     cols_for_concat = ['gender', 'age', 'income', 'buyer', 'region', 'area', 'parent','variant_assignment','target_control']
