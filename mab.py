@@ -1,5 +1,5 @@
 def mab_test():
-    print('Good - Abraham')
+    return 'Good - Abraham'
 
 def get_pd_weights(segments):
 
