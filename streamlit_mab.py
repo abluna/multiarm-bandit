@@ -7,6 +7,7 @@ st.write("""
 # Multi-Arm Bandit Campaign Simulator
 """)
 
-st.write("""
-mab.mab_test()
-""")
+test_message = mab.mab_test()
+if st.button('Tet App'):
+    with st.spinner('Wait for it...'):
+        st.write(test_message)
