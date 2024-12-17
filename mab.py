@@ -243,7 +243,7 @@ def add_conversion_rates(df, seg_cols=None, segments=None, all_combos_weights=No
 
     return df[cols_to_return]
      
-def assignment_with_optimization(df, prior_performance_scores=None,seg_cols=None, opt_target_size=0.05, learning_weight=1):
+def assignment_with_optimization(df, prior_performance_scores=None,seg_cols=None,method='max', opt_target_size=0.05, learning_weight=1):
 
     import numpy as np
     import pandas as pd
@@ -259,25 +259,47 @@ def assignment_with_optimization(df, prior_performance_scores=None,seg_cols=None
     Segment_df_step2_target_org = df[df['target_control']=='target_org'].copy()
     Segment_df_step2_control = df[df['target_control']=='control'].copy()
 
-    Segment_df_step2_target_org['variant_assignment'] = np.random.choice(['Variant A', 'Variant B', 'Variant C'], len(Segment_df_step2_target_org.index), p=[1/3,1/3,1/3])
+    Segment_df_step2_target_org['variant_assignment'] = np.random.choice(['Variant A', 'Variant B', 'Variant C'], len(Segment_df_step2_target_org), p=[1/3,1/3,1/3])
     Segment_df_step2_control['variant_assignment'] = "Control"
 
     ###  Create routine for assigning weights to each variant ###
     Segment_df_step2_target_opt = Segment_df_step2_target_opt.merge(prior_performance_scores, how='left', on=["gender","age","income","buyer","region","area","parent"])
 
-    ## Turn it into a share
-    variant_col_names = ['Variant_a_performance','Variant_b_performance','Variant_c_performance']
-    Segment_df_step2_target_opt[variant_col_names] = Segment_df_step2_target_opt[variant_col_names] ** learning_weight
+    if method=='prob':
+    
+        ## Turn it into a share
+        variant_col_names = ['Variant_a_performance','Variant_b_performance','Variant_c_performance']
+        Segment_df_step2_target_opt[variant_col_names] = Segment_df_step2_target_opt[variant_col_names] ** learning_weight
 
-    Segment_df_step2_target_opt['final_denominator'] = Segment_df_step2_target_opt[variant_col_names].sum(axis=1)
+        Segment_df_step2_target_opt['final_denominator'] = Segment_df_step2_target_opt[variant_col_names].sum(axis=1)
+        for i in range(3):
+            Segment_df_step2_target_opt[variant_col_names[i] + '_share'] = Segment_df_step2_target_opt[variant_col_names[i]] / Segment_df_step2_target_opt['final_denominator']
 
-    for i in range(3):
-        Segment_df_step2_target_opt[variant_col_names[i] + '_share'] = Segment_df_step2_target_opt[variant_col_names[i]] / Segment_df_step2_target_opt['final_denominator']
+        Segment_df_step2_target_opt['variant_assignment'] = Segment_df_step2_target_opt.apply(lambda row: np.random.choice(['Variant A', 'Variant B', 'Variant C'], p=row[['Variant_a_performance_share','Variant_b_performance_share','Variant_c_performance_share']]), axis=1)
 
-    Segment_df_step2_target_opt['variant_assignment'] = Segment_df_step2_target_opt.apply(lambda row: np.random.choice(['Variant A', 'Variant B', 'Variant C'], p=row[['Variant_a_performance_share','Variant_b_performance_share','Variant_c_performance_share']]), axis=1)
+        cols_for_concat = ['gender', 'age', 'income', 'buyer', 'region', 'area', 'parent','variant_assignment','target_control']
+        
+    if method=='max':
+        ## Turn it into a share
+        variant_col_names = ['Variant_a_performance','Variant_b_performance','Variant_c_performance']
+        Segment_df_step2_target_opt[variant_col_names] = Segment_df_step2_target_opt[variant_col_names] ** learning_weight
 
-    ## join the three tables
-    cols_for_concat = ['gender', 'age', 'income', 'buyer', 'region', 'area', 'parent','variant_assignment','target_control']
+        Segment_df_step2_target_opt['final_denominator'] = Segment_df_step2_target_opt[variant_col_names].sum(axis=1)
+        for i in range(3):
+            Segment_df_step2_target_opt[variant_col_names[i] + '_share'] = Segment_df_step2_target_opt[variant_col_names[i]] / Segment_df_step2_target_opt['final_denominator']
+        
+        variant_col_names_share = ['Variant_a_performance_share','Variant_b_performance_share','Variant_c_performance_share']
+        Segment_df_step2_target_opt['variant_assignment'] = Segment_df_step2_target_opt[variant_col_names].idxmax(axis='columns')
+        Segment_df_step2_target_opt['max_prob'] = Segment_df_step2_target_opt[variant_col_names_share].max(axis=1)
+        Segment_df_step2_target_opt['core_membership'] = np.where(Segment_df_step2_target_opt['max_prob'] > 0.7, 'Yes', 'No')
+        
+        Segment_df_step2_target_opt = Segment_df_step2_target_opt.replace({'variant_assignment' : {'Variant_a_performance' : 'Variant A', 
+                                                                                                   'Variant_b_performance' : 'Variant B', 
+                                                                                                   'Variant_c_performance' : 'Variant C'}})
+        
+        cols_for_concat = ['gender', 'age', 'income', 'buyer', 'region', 'area', 'parent','variant_assignment','target_control','max_prob','core_membership']
+    
+    ## join the three tables  
     Segment_df_step2_final = pd.concat([Segment_df_step2_target_opt, Segment_df_step2_target_org,Segment_df_step2_control], sort=True)[cols_for_concat]
     Segment_df_step2_final.sort_index()
     
@@ -313,16 +335,16 @@ def create_all_combo_weights():
     variant_c = result_df.copy()
     variant_control = result_df.copy()
     
-    variant_a["combos_weights"] = np.random.chisquare(9, size=len(result_df)) / 100
+    variant_a["combos_weights"] = np.random.chisquare(15, size=len(result_df)) / 100
     variant_a['variant_assignment'] = 'Variant A'
 
-    variant_b["combos_weights"] = np.random.chisquare(9, size=len(result_df)) / 100
+    variant_b["combos_weights"] = np.random.chisquare(15, size=len(result_df)) / 100
     variant_b['variant_assignment'] = 'Variant B'
     
-    variant_c["combos_weights"] = np.random.chisquare(9, size=len(result_df)) / 100
+    variant_c["combos_weights"] = np.random.chisquare(15, size=len(result_df)) / 100
     variant_c['variant_assignment'] = 'Variant C'
     
-    variant_control["combos_weights"] = np.random.chisquare(2, size=len(result_df)) / 100
+    variant_control["combos_weights"] = np.random.chisquare(3, size=len(result_df)) / 100
     variant_control['variant_assignment'] = 'Control'
     
     result_df = pd.concat([variant_a, variant_b, variant_c, variant_control]).reset_index(drop=True)
