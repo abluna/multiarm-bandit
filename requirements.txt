@@ -1,0 +1,6 @@
+streamlit
+pandas
+numpy
+sys
+itertools
+huggingface_hub
