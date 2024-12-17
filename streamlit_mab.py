@@ -8,6 +8,6 @@ st.write("""
 """)
 
 test_message = mab.mab_test()
-if st.button('Tet App'):
+if st.button('Test App'):
     with st.spinner('Wait for it...'):
         st.write(test_message)
