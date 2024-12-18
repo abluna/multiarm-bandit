@@ -109,14 +109,14 @@ if st.button('Run Performance Simulation'):
                 opt_target_performance = Segment_df_step2.loc[Segment_df_step2['target_control'] == 'target_opt', 'converted'].mean()
                 
                 ## Adding overall target performance
-                overall_target_performance_variant_a = Segment_df_step2.loc[(Segment_df_step2['variant_assignment'] != 'Control') & (Segment_df_step2['variant_assignment'] == 'Variant A'), 'converted'].mean()
-                overall_target_performance_variant_b = Segment_df_step2.loc[(Segment_df_step2['variant_assignment'] != 'Control') & (Segment_df_step2['variant_assignment'] == 'Variant B'), 'converted'].mean()
-                overall_target_performance_variant_c = Segment_df_step2.loc[(Segment_df_step2['variant_assignment'] != 'Control') & (Segment_df_step2['variant_assignment'] == 'Variant C'), 'converted'].mean()
+                overall_target_performance_variant_a = Segment_df_step2.loc[(Segment_df_step2['target_control'] != 'Control') & (Segment_df_step2['variant_assignment'] == 'Variant A'), 'converted'].mean()
+                overall_target_performance_variant_b = Segment_df_step2.loc[(Segment_df_step2['target_control'] != 'Control') & (Segment_df_step2['variant_assignment'] == 'Variant B'), 'converted'].mean()
+                overall_target_performance_variant_c = Segment_df_step2.loc[(Segment_df_step2['target_control'] != 'Control') & (Segment_df_step2['variant_assignment'] == 'Variant C'), 'converted'].mean()
 
                 ## Adding organic performance only by variant
-                organic_target_performance_variant_a = Segment_df_step2.loc[(Segment_df_step2['variant_assignment'] == 'target_org') & (Segment_df_step2['variant_assignment'] == 'Variant A'), 'converted'].mean()
-                organic_target_performance_variant_b = Segment_df_step2.loc[(Segment_df_step2['variant_assignment'] == 'target_org') & (Segment_df_step2['variant_assignment'] == 'Variant B'), 'converted'].mean()
-                organic_target_performance_variant_c = Segment_df_step2.loc[(Segment_df_step2['variant_assignment'] == 'target_org') & (Segment_df_step2['variant_assignment'] == 'Variant C'), 'converted'].mean()
+                organic_target_performance_variant_a = Segment_df_step2.loc[(Segment_df_step2['target_control'] == 'target_org') & (Segment_df_step2['variant_assignment'] == 'Variant A'), 'converted'].mean()
+                organic_target_performance_variant_b = Segment_df_step2.loc[(Segment_df_step2['target_control'] == 'target_org') & (Segment_df_step2['variant_assignment'] == 'Variant B'), 'converted'].mean()
+                organic_target_performance_variant_c = Segment_df_step2.loc[(Segment_df_step2['target_control'] == 'target_org') & (Segment_df_step2['variant_assignment'] == 'Variant C'), 'converted'].mean()
 
 
                 ## For Next Iteration ##
@@ -127,9 +127,9 @@ if st.button('Run Performance Simulation'):
                 Segment_df_step2.loc[Segment_df_step2['variant_assignment'] == 'Variant C', 'Variant_c_performance'] = Segment_df_step2['converted']
                 
                 ## Performance Scores all interactions
-                perf_scores_all_interactions = Segment_df_step2[Segment_df_step2['target_control'] != 'control'].groupby(seg_cols).agg({'Variant_a_performance': ['mean'],
-                                                                                                                                        'Variant_b_performance': ['mean'],
-                                                                                                                                        'Variant_c_performance': ['mean']}).reset_index().droplevel(1, axis = 1)
+                perf_scores_all_interactions = Segment_df_step2[Segment_df_step2['target_control'] == 'target_org'].groupby(seg_cols).agg({'Variant_a_performance': ['mean'],
+                                                                                                                                           'Variant_b_performance': ['mean'],
+                                                                                                                                           'Variant_c_performance': ['mean']}).reset_index().droplevel(1, axis = 1)
 
             curr_table = pd.DataFrame([{'Overall Performance':overall_performance, 
                                         'All Target Performance':overall_target_performance, 
