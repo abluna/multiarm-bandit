@@ -43,16 +43,16 @@ if st.button('Run Performance Simulation'):
                                               print_diagnostics=False)
 
 
-        schema = {'Overall Performance':'float64', 
-                  'Organic Target Performance':'float64', 
-                  'Organic Variant A Performance':'float64',
-                  'All Variant A Performance':'float64',
-                  'Organic Variant B Performance':'float64',
-                  'All Variant B Performance':'float64',
-                  'Organic Variant C Performance':'float64',
-                  'All Variant C Performance':'float64'}
+        schema = {'Overall Performance':pd.Series(dtype='float'), 
+                  'Organic Target Performance':pd.Series(dtype='float'), 
+                  'Organic Variant A Performance':pd.Series(dtype='float'),
+                  'All Variant A Performance':pd.Series(dtype='float'),
+                  'Organic Variant B Performance':pd.Series(dtype='float'),
+                  'All Variant B Performance':pd.Series(dtype='float'),
+                  'Organic Variant C Performance':pd.Series(dtype='float'),
+                  'All Variant C Performance':pd.Series(dtype='float')}
                                               
-        df_to_display = pd.DataFrame(columns=schema.keys(), dtype=schema)
+        df_to_display = pd.DataFrame(schema)
         
         initial_df_st = st.table(df_to_display)
         
@@ -138,6 +138,6 @@ if st.button('Run Performance Simulation'):
                                         'Organic Variant B Performance':organic_target_performance_variant_b,
                                         'All Variant B Performance':overall_target_performance_variant_b,
                                         'Organic Variant C Performance':organic_target_performance_variant_c,
-                                        'All Variant C Performance':overall_target_performance_variant_c}], dtype=schema)
+                                        'All Variant C Performance':overall_target_performance_variant_c}])
             
             initial_df_st.add_rows(curr_table)
