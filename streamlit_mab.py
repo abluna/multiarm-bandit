@@ -105,7 +105,7 @@ if st.button('Run Performance Simulation'):
                 perf_scores_all_interactions = Segment_df.groupby(seg_cols).agg({'Variant_a_performance': ['mean'],
                                                                                  'Variant_b_performance': ['mean'],
                                                                                  'Variant_c_performance': ['mean']}).reset_index().droplevel(1, axis = 1)
-
+                
             if i > 0:
                 
                 Segment_df_step2 = mab.create_synthetic_sample(row_count=row_count)
@@ -142,8 +142,7 @@ if st.button('Run Performance Simulation'):
                                                                                                                                         'Variant_b_performance': ['mean'],
                                                                                                                                         'Variant_c_performance': ['mean']}).reset_index().droplevel(1, axis = 1)
 
-            curr_table = pd.DataFrame({'Iteration': i, 
-                                        'Overall Performance':overall_performance, 
+            curr_table = pd.DataFrame({'Overall Performance':overall_performance, 
                                         'All Target Performance':overall_target_performance, 
                                         'Organic Variant A Performance':organic_target_performance_variant_a,
                                         'All Variant A Performance':overall_target_performance_variant_a,
