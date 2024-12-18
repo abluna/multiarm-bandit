@@ -42,8 +42,7 @@ if st.button('Run Performance Simulation'):
                                               all_combos_weights=combo_weights,
                                               print_diagnostics=False)
                                               
-        df_to_display = pd.DataFrame(columns=['Iteration', 
-                                              'Overall Performance', 
+        df_to_display = pd.DataFrame(columns=['Overall Performance', 
                                               'Organic Target Performance', 
                                               'Organic Variant A Performance',
                                               'All Variant A Performance',
