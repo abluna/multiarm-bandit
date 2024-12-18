@@ -70,7 +70,6 @@ if st.button('Run Performance Simulation'):
                 overall_performance = Segment_df['converted'].mean()
                 org_target_performance = Segment_df.loc[Segment_df['variant_assignment'] != 'Control', 'converted'].mean()
                 overall_target_performance = Segment_df.loc[Segment_df['variant_assignment'] != 'Control', 'converted'].mean()
-                opt_target_performance = None
                 
                 ## Adding overall target performance
                 overall_target_performance_variant_a = Segment_df.loc[(Segment_df['variant_assignment'] != 'Control') & (Segment_df['variant_assignment'] == 'Variant A'), 'converted'].mean()
