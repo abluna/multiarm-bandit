@@ -54,19 +54,6 @@ if st.button('Run Performance Simulation'):
         
         initial_df_st = st.table(df_to_display)
         
-
-        ## Let's do 50 Loops, each time increasing the optimized target sample by 1
-        overall_performance = []
-        overall_target_performance = []
-        org_target_performance = []
-        opt_target_performance = []
-        overall_target_performance_variant_a = []
-        overall_target_performance_variant_b = []
-        overall_target_performance_variant_c = []
-        organic_target_performance_variant_a = []
-        organic_target_performance_variant_b = []
-        organic_target_performance_variant_c = []
-
         steps = 75
         row_count = 100000
 
@@ -115,9 +102,9 @@ if st.button('Run Performance Simulation'):
                 
                 ## Store Results
                 overall_performance = Segment_df_step2['converted'].mean()
-                overall_target_performance = Segment_df_step2.loc[Segment_df_step2['target_control'] != 'control', 'converted'].mean()
-                org_target_performance = Segment_df_step2.loc[Segment_df_step2['target_control'] == 'target_org', 'converted'].mean()
-                opt_target_performance = Segment_df_step2.loc[Segment_df_step2['target_control'] == 'target_opt', 'converted'].mean()
+                overall_target_performance = Segment_df_step2.loc[Segment_df_step2['target_control'] != 'control', 'converted'].mean().values
+                org_target_performance = Segment_df_step2.loc[Segment_df_step2['target_control'] == 'target_org', 'converted'].mean().values
+                opt_target_performance = Segment_df_step2.loc[Segment_df_step2['target_control'] == 'target_opt', 'converted'].mean().values
                 
                 ## Adding overall target performance
                 overall_target_performance_variant_a = Segment_df_step2.loc[(Segment_df_step2['variant_assignment'] != 'Control') & (Segment_df_step2['variant_assignment'] == 'Variant A'), 'converted'].mean()
@@ -142,13 +129,13 @@ if st.button('Run Performance Simulation'):
                                                                                                                                         'Variant_b_performance': ['mean'],
                                                                                                                                         'Variant_c_performance': ['mean']}).reset_index().droplevel(1, axis = 1)
 
-            curr_table = pd.DataFrame({'Overall Performance':overall_performance, 
+            curr_table = pd.DataFrame([{'Overall Performance':overall_performance, 
                                         'All Target Performance':overall_target_performance, 
                                         'Organic Variant A Performance':organic_target_performance_variant_a,
                                         'All Variant A Performance':overall_target_performance_variant_a,
                                         'Organic Variant B Performance':organic_target_performance_variant_b,
                                         'All Variant B Performance':overall_target_performance_variant_b,
                                         'Organic Variant C Performance':organic_target_performance_variant_c,
-                                        'All Variant C Performance':overall_target_performance_variant_c})
+                                        'All Variant C Performance':overall_target_performance_variant_c}])
             
             initial_df_st.add_rows(curr_table)
