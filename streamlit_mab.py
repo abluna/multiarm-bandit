@@ -42,6 +42,19 @@ if st.button('Run Performance Simulation'):
                                               all_combos_weights=combo_weights,
                                               print_diagnostics=False)
                                               
+        df_to_display = pd.DataFrame(columns=['Iteration', 
+                                              'Overall Performance', 
+                                              'Organic Target Performance', 
+                                              'Organic Variant A Performance',
+                                              'All Variant A Performance',
+                                              'Organic Variant B Performance',
+                                              'All Variant B Performance',
+                                              'Organic Variant C Performance',
+                                              'All Variant C Performance'])
+        
+        initial_df_st = st.table(df_to_display)
+        
+
         ## Let's do 50 Loops, each time increasing the optimized target sample by 1
         overall_performance = []
         overall_target_performance = []
@@ -65,20 +78,20 @@ if st.button('Run Performance Simulation'):
                 Segment_df = mab.add_conversion_rates(df=Segment_df, seg_cols=seg_cols, segments=segments, all_combos_weights=combo_weights, print_diagnostics=False)
 
                 ## Store results
-                overall_performance.append(Segment_df['converted'].mean())
-                org_target_performance.append(Segment_df.loc[Segment_df['variant_assignment'] != 'Control', 'converted'].mean())
-                overall_target_performance.append(Segment_df.loc[Segment_df['variant_assignment'] != 'Control', 'converted'].mean())
-                opt_target_performance.append(None)
+                overall_performance = Segment_df['converted'].mean()
+                org_target_performance = Segment_df.loc[Segment_df['variant_assignment'] != 'Control', 'converted'].mean()
+                overall_target_performance = Segment_df.loc[Segment_df['variant_assignment'] != 'Control', 'converted'].mean()
+                opt_target_performance = None
                 
                 ## Adding overall target performance
-                overall_target_performance_variant_a.append(Segment_df.loc[(Segment_df['variant_assignment'] != 'Control') & (Segment_df['variant_assignment'] == 'Variant A'), 'converted'].mean())
-                overall_target_performance_variant_b.append(Segment_df.loc[(Segment_df['variant_assignment'] != 'Control') & (Segment_df['variant_assignment'] == 'Variant B'), 'converted'].mean())
-                overall_target_performance_variant_c.append(Segment_df.loc[(Segment_df['variant_assignment'] != 'Control') & (Segment_df['variant_assignment'] == 'Variant C'), 'converted'].mean())
+                overall_target_performance_variant_a = Segment_df.loc[(Segment_df['variant_assignment'] != 'Control') & (Segment_df['variant_assignment'] == 'Variant A'), 'converted'].mean()
+                overall_target_performance_variant_b = Segment_df.loc[(Segment_df['variant_assignment'] != 'Control') & (Segment_df['variant_assignment'] == 'Variant B'), 'converted'].mean()
+                overall_target_performance_variant_c = Segment_df.loc[(Segment_df['variant_assignment'] != 'Control') & (Segment_df['variant_assignment'] == 'Variant C'), 'converted'].mean()
 
                 ## Adding organic performance only by variant
-                organic_target_performance_variant_a.append(Segment_df.loc[(Segment_df['variant_assignment'] == 'target_org') & (Segment_df['variant_assignment'] == 'Variant A'), 'converted'].mean())
-                organic_target_performance_variant_b.append(Segment_df.loc[(Segment_df['variant_assignment'] == 'target_org') & (Segment_df['variant_assignment'] == 'Variant B'), 'converted'].mean())
-                organic_target_performance_variant_c.append(Segment_df.loc[(Segment_df['variant_assignment'] == 'target_org') & (Segment_df['variant_assignment'] == 'Variant C'), 'converted'].mean())
+                organic_target_performance_variant_a = Segment_df.loc[(Segment_df['variant_assignment'] == 'target_org') & (Segment_df['variant_assignment'] == 'Variant A'), 'converted'].mean()
+                organic_target_performance_variant_b = Segment_df.loc[(Segment_df['variant_assignment'] == 'target_org') & (Segment_df['variant_assignment'] == 'Variant B'), 'converted'].mean()
+                organic_target_performance_variant_c = Segment_df.loc[(Segment_df['variant_assignment'] == 'target_org') & (Segment_df['variant_assignment'] == 'Variant C'), 'converted'].mean()
 
 
                 ### For Next Iteration ###
@@ -101,20 +114,20 @@ if st.button('Run Performance Simulation'):
                 Segment_df_step2 = Segment_df_step2.reset_index(drop=True)
                 
                 ## Store Results
-                overall_performance.append(Segment_df_step2['converted'].mean())
-                overall_target_performance.append(Segment_df_step2.loc[Segment_df_step2['target_control'] != 'control', 'converted'].mean())
-                org_target_performance.append(Segment_df_step2.loc[Segment_df_step2['target_control'] == 'target_org', 'converted'].mean())
-                opt_target_performance.append(Segment_df_step2.loc[Segment_df_step2['target_control'] == 'target_opt', 'converted'].mean())
+                overall_performance = Segment_df_step2['converted'].mean()
+                overall_target_performance = Segment_df_step2.loc[Segment_df_step2['target_control'] != 'control', 'converted'].mean()
+                org_target_performance = Segment_df_step2.loc[Segment_df_step2['target_control'] == 'target_org', 'converted'].mean()
+                opt_target_performance = Segment_df_step2.loc[Segment_df_step2['target_control'] == 'target_opt', 'converted'].mean()
                 
                 ## Adding overall target performance
-                overall_target_performance_variant_a.append(Segment_df_step2.loc[(Segment_df_step2['variant_assignment'] != 'Control') & (Segment_df_step2['variant_assignment'] == 'Variant A'), 'converted'].mean())
-                overall_target_performance_variant_b.append(Segment_df_step2.loc[(Segment_df_step2['variant_assignment'] != 'Control') & (Segment_df_step2['variant_assignment'] == 'Variant B'), 'converted'].mean())
-                overall_target_performance_variant_c.append(Segment_df_step2.loc[(Segment_df_step2['variant_assignment'] != 'Control') & (Segment_df_step2['variant_assignment'] == 'Variant C'), 'converted'].mean())
+                overall_target_performance_variant_a = Segment_df_step2.loc[(Segment_df_step2['variant_assignment'] != 'Control') & (Segment_df_step2['variant_assignment'] == 'Variant A'), 'converted'].mean()
+                overall_target_performance_variant_b = Segment_df_step2.loc[(Segment_df_step2['variant_assignment'] != 'Control') & (Segment_df_step2['variant_assignment'] == 'Variant B'), 'converted'].mean()
+                overall_target_performance_variant_c = Segment_df_step2.loc[(Segment_df_step2['variant_assignment'] != 'Control') & (Segment_df_step2['variant_assignment'] == 'Variant C'), 'converted'].mean()
 
                 ## Adding organic performance only by variant
-                organic_target_performance_variant_a.append(Segment_df_step2.loc[(Segment_df_step2['variant_assignment'] == 'target_org') & (Segment_df_step2['variant_assignment'] == 'Variant A'), 'converted'].mean())
-                organic_target_performance_variant_b.append(Segment_df_step2.loc[(Segment_df_step2['variant_assignment'] == 'target_org') & (Segment_df_step2['variant_assignment'] == 'Variant B'), 'converted'].mean())
-                organic_target_performance_variant_c.append(Segment_df_step2.loc[(Segment_df_step2['variant_assignment'] == 'target_org') & (Segment_df_step2['variant_assignment'] == 'Variant C'), 'converted'].mean())
+                organic_target_performance_variant_a = Segment_df_step2.loc[(Segment_df_step2['variant_assignment'] == 'target_org') & (Segment_df_step2['variant_assignment'] == 'Variant A'), 'converted'].mean()
+                organic_target_performance_variant_b = Segment_df_step2.loc[(Segment_df_step2['variant_assignment'] == 'target_org') & (Segment_df_step2['variant_assignment'] == 'Variant B'), 'converted'].mean()
+                organic_target_performance_variant_c = Segment_df_step2.loc[(Segment_df_step2['variant_assignment'] == 'target_org') & (Segment_df_step2['variant_assignment'] == 'Variant C'), 'converted'].mean()
 
 
                 ## For Next Iteration ##
@@ -139,4 +152,4 @@ if st.button('Run Performance Simulation'):
                                         'Organic Variant C Performance':organic_target_performance_variant_c,
                                         'All Variant C Performance':overall_target_performance_variant_c})
             
-            st.dataframe(curr_table)
+            initial_df_st.add_rows(curr_table)
