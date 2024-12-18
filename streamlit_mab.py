@@ -41,15 +41,18 @@ if st.button('Run Performance Simulation'):
                                               segments=segments, 
                                               all_combos_weights=combo_weights,
                                               print_diagnostics=False)
+
+
+        schema = {'Overall Performance':'float64', 
+                  'Organic Target Performance':'float64', 
+                  'Organic Variant A Performance':'float64',
+                  'All Variant A Performance':'float64',
+                  'Organic Variant B Performance':'float64',
+                  'All Variant B Performance':'float64',
+                  'Organic Variant C Performance':'float64',
+                  'All Variant C Performance':'float64'}
                                               
-        df_to_display = pd.DataFrame(columns=['Overall Performance', 
-                                              'Organic Target Performance', 
-                                              'Organic Variant A Performance',
-                                              'All Variant A Performance',
-                                              'Organic Variant B Performance',
-                                              'All Variant B Performance',
-                                              'Organic Variant C Performance',
-                                              'All Variant C Performance'])
+        df_to_display = pd.DataFrame(columns=schema.keys(), dtype=schema)
         
         initial_df_st = st.table(df_to_display)
         
@@ -135,6 +138,6 @@ if st.button('Run Performance Simulation'):
                                         'Organic Variant B Performance':organic_target_performance_variant_b,
                                         'All Variant B Performance':overall_target_performance_variant_b,
                                         'Organic Variant C Performance':organic_target_performance_variant_c,
-                                        'All Variant C Performance':overall_target_performance_variant_c}])
+                                        'All Variant C Performance':overall_target_performance_variant_c}], dtype=schema)
             
             initial_df_st.add_rows(curr_table)
