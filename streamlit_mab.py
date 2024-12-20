@@ -13,7 +13,18 @@ test_message = mab.mab_test()
 if st.button('Test App'):
     with st.spinner('Wait for it...'):
         st.write(test_message)
+        df1 = pd.DataFrame(np.random.randn(50, 20), columns=("col %d" % i for i in range(20)))
 
+        my_chart = st.vega_lite_chart(
+            {
+                "mark": "line",
+                "encoding": {"x": "a", "y": "b"},
+                "datasets": {
+                    "some_fancy_name": df1,  # <-- named dataset
+                },
+                "data": {"name": "some_fancy_name"},
+            }
+        )
 
 row_count = 100000
 seg_cols = ['gender', 'age',
