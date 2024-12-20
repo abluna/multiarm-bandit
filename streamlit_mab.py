@@ -53,6 +53,8 @@ if st.button('Run Performance Simulation'):
                   'All Variant B Performance':pd.Series(dtype='float'),
                   'Organic Variant C Performance':pd.Series(dtype='float'),
                   'All Variant C Performance':pd.Series(dtype='float')}
+                  
+              
                                               
         df_to_display = pd.DataFrame(schema)
         
@@ -142,6 +144,7 @@ if st.button('Run Performance Simulation'):
             curr_table = pd.DataFrame([{'ind_num':i+1,
                                         'Overall Performance':overall_performance, 
                                         'All Target Performance':overall_target_performance, 
+                                        'Organic Target Performance':org_target_performance,
                                         'Organic Variant A Performance':organic_target_performance_variant_a,
                                         'All Variant A Performance':overall_target_performance_variant_a,
                                         'Organic Variant B Performance':organic_target_performance_variant_b,
