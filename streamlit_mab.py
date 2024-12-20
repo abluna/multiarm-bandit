@@ -60,10 +60,19 @@ if st.button('Run Performance Simulation'):
         
         # initial_df_st = st.table(df_to_display)
         overall_chart_cols = ["Overall Performance", "All Target Performance","Organic Target Performance"]
-        my_chart = st.line_chart(df_to_display[overall_chart_cols],
-                                 y=["Overall Performance", "All Target Performance","Organic Target Performance"],
-                                 x_label = 'Iteration',
-                                 y_label = 'Performance')
+
+                                 
+                                 
+         my_chart = st.vega_lite_chart(
+            {
+                "mark": "line",
+                "encoding": {"y": "Overall Performance"},
+                "datasets": {
+                    "my_df": df_to_display,
+                },
+                "data": {"name": "my_df"},
+            }
+        )
 
                 
         steps = 75
@@ -152,4 +161,4 @@ if st.button('Run Performance Simulation'):
                                         'All Variant C Performance':overall_target_performance_variant_c}])
             
             # initial_df_st.add_rows(curr_table)
-            my_chart.add_rows(curr_table[overall_chart_cols])
+            my_chart.add_rows(my_df=curr_table[overall_chart_cols])
