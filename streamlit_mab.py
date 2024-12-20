@@ -13,17 +13,19 @@ test_message = mab.mab_test()
 if st.button('Test App'):
     with st.spinner('Wait for it...'):
         st.write(test_message)
-        df1 = pd.DataFrame(np.random.randn(50, 20), columns=("col %d" % i for i in range(20)))
+        chart_data = pd.DataFrame(np.random.randn(200, 3), columns=["a", "b", "c"])
 
-        my_chart = st.vega_lite_chart(
-            {
-                "mark": "line",
-                "encoding": {"x": "a", "y": "b"},
-                "datasets": {
-                    "some_fancy_name": df1,  # <-- named dataset
-                },
-                "data": {"name": "some_fancy_name"},
-            }
+        st.vega_lite_chart(
+           chart_data,
+           {
+               "mark": {"type": "circle", "tooltip": True},
+               "encoding": {
+                   "x": {"field": "a", "type": "quantitative"},
+                   "y": {"field": "b", "type": "quantitative"},
+                   "size": {"field": "c", "type": "quantitative"},
+                   "color": {"field": "c", "type": "quantitative"},
+               },
+           },
         )
 
 row_count = 100000
