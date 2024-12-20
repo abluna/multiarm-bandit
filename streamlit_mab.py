@@ -17,7 +17,7 @@ if st.button('Test App'):
             np.random.randn(50, 20), columns=("col %d" % i for i in range(20))
         )
         
-        my_chart = st.vega_lite_chart(
+        st.vega_lite_chart(
             {
                 "mark": "line",
                 "encoding": {"x": "a", "y": "b"},
