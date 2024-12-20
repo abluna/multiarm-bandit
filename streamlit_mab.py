@@ -55,6 +55,8 @@ if st.button('Run Performance Simulation'):
         df_to_display = pd.DataFrame(schema)
         
         initial_df_st = st.table(df_to_display)
+        my_chart = st.line_chart(initial_df_st)
+
                 
         steps = 75
         row_count = 100000
@@ -140,6 +142,4 @@ if st.button('Run Performance Simulation'):
                                         'All Variant C Performance':overall_target_performance_variant_c}])
             
             initial_df_st.add_rows(curr_table)
-            
-            my_chart = st.line_chart(curr_table)
-            initial_df_st.add_rows(curr_table)
+            my_chart.add_rows(curr_table)
