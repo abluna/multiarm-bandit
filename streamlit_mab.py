@@ -141,5 +141,5 @@ if st.button('Run Performance Simulation'):
             
             initial_df_st.add_rows(curr_table)
             
-            
-            st.line_chart(initial_df_st)
+            my_chart = st.line_chart(curr_table)
+            initial_df_st.add_rows(curr_table)
