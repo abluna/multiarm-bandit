@@ -59,9 +59,8 @@ if st.button('Run Performance Simulation'):
         df_to_display = pd.DataFrame(schema)
         
         # initial_df_st = st.table(df_to_display)
-        overall_chart_cols = ["ind_num", "Overall Performance", "All Target Performance","Organic Target Performance"]
+        overall_chart_cols = ["Overall Performance", "All Target Performance","Organic Target Performance"]
         my_chart = st.line_chart(df_to_display[overall_chart_cols],
-                                 x='ind_num',
                                  y=["Overall Performance", "All Target Performance","Organic Target Performance"],
                                  x_label = 'Iteration',
                                  y_label = 'Performance')
