@@ -43,7 +43,9 @@ if st.button('Run Performance Simulation'):
                                               print_diagnostics=False)
 
 
-        schema = {'Overall Performance':pd.Series(dtype='float'), 
+        schema = {'ind_num':pd.Series(dtype='int'),
+                  'Overall Performance':pd.Series(dtype='float'), 
+                  'All Target Performance':pd.Series(dtype='float'), 
                   'Organic Target Performance':pd.Series(dtype='float'), 
                   'Organic Variant A Performance':pd.Series(dtype='float'),
                   'All Variant A Performance':pd.Series(dtype='float'),
@@ -54,8 +56,10 @@ if st.button('Run Performance Simulation'):
                                               
         df_to_display = pd.DataFrame(schema)
         
-        initial_df_st = st.table(df_to_display)
-        my_chart = st.line_chart(df_to_display)
+        # initial_df_st = st.table(df_to_display)
+        my_chart = st.line_chart(df_to_display,
+                                 x='ind_num',
+                                 y=["Overall Performance","All Target Performance","Organic Target Performance"])
 
                 
         steps = 75
@@ -132,7 +136,8 @@ if st.button('Run Performance Simulation'):
                                                                                                                                            'Variant_b_performance': ['mean'],
                                                                                                                                            'Variant_c_performance': ['mean']}).reset_index().droplevel(1, axis = 1)
 
-            curr_table = pd.DataFrame([{'Overall Performance':overall_performance, 
+            curr_table = pd.DataFrame([{'ind_num':i+1,
+                                        'Overall Performance':overall_performance, 
                                         'All Target Performance':overall_target_performance, 
                                         'Organic Variant A Performance':organic_target_performance_variant_a,
                                         'All Variant A Performance':overall_target_performance_variant_a,
@@ -141,5 +146,5 @@ if st.button('Run Performance Simulation'):
                                         'Organic Variant C Performance':organic_target_performance_variant_c,
                                         'All Variant C Performance':overall_target_performance_variant_c}])
             
-            initial_df_st.add_rows(curr_table)
+            # initial_df_st.add_rows(curr_table)
             my_chart.add_rows(curr_table)
