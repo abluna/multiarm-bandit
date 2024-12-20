@@ -147,4 +147,4 @@ if st.button('Run Performance Simulation'):
                                         'All Variant C Performance':overall_target_performance_variant_c}])
             
             # initial_df_st.add_rows(curr_table)
-            my_chart.add_rows(curr_table[['ind_num', "Overall Performance", "All Target Performance","Organic Target Performance"]])
+            my_chart.add_rows(curr_table)
