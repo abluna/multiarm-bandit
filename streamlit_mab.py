@@ -57,9 +57,12 @@ if st.button('Run Performance Simulation'):
         df_to_display = pd.DataFrame(schema)
         
         # initial_df_st = st.table(df_to_display)
-        my_chart = st.line_chart(df_to_display,
+        overall_chart_cols = ["ind_num", "Overall Performance", "All Target Performance","Organic Target Performance"]
+        my_chart = st.line_chart(df_to_display[overall_chart_cols],
                                  x='ind_num',
-                                 y=["Overall Performance", "All Target Performance","Organic Target Performance"])
+                                 y=["Overall Performance", "All Target Performance","Organic Target Performance"],
+                                 x_label = 'Iteration',
+                                 y_label = 'Performance')
 
                 
         steps = 75
@@ -147,4 +150,4 @@ if st.button('Run Performance Simulation'):
                                         'All Variant C Performance':overall_target_performance_variant_c}])
             
             # initial_df_st.add_rows(curr_table)
-            my_chart.add_rows(curr_table)
+            my_chart.add_rows(curr_table[overall_chart_cols])
