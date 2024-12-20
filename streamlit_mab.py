@@ -57,19 +57,7 @@ if st.button('Run Performance Simulation'):
               
                                               
         df_to_display = pd.DataFrame(schema)
-        
-        # initial_df_st = st.table(df_to_display)                             
-        my_chart = st.vega_lite_chart(
-            {
-                "mark": "line",
-                "encoding": {"x":"ind_num", "y":"Overall Performance"},
-                "datasets": {
-                    "my_df": df_to_display,
-                },
-                "data": {"name": "my_df"},
-            }
-        )
-                        
+                                
         steps = 10
         row_count = 100000
 
@@ -156,6 +144,16 @@ if st.button('Run Performance Simulation'):
                                         'All Variant C Performance':overall_target_performance_variant_c}])
             
             # initial_df_st.add_rows(curr_table)
-            my_chart.add_rows(my_df=curr_table)
+            # initial_df_st = st.table(df_to_display)                             
+            my_chart = st.vega_lite_chart(
+                {
+                    "mark": "line",
+                    "encoding": {"x":"ind_num", "y":"Overall Performance"},
+                    "datasets": {
+                        "my_df": curr_table,
+                    },
+                    "data": {"name": "my_df"},
+                }
+            )
 
         
