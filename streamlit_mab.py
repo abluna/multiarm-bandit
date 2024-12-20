@@ -63,7 +63,7 @@ if st.button('Run Performance Simulation'):
 
                                  
                                  
-         my_chart = st.vega_lite_chart(
+        my_chart = st.vega_lite_chart(
             {
                 "mark": "line",
                 "encoding": {"y": "Overall Performance"},
