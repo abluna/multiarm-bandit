@@ -73,9 +73,11 @@ if st.button('Run Performance Simulation'):
                 "data": {"name": "my_df"},
             }
         )
+        
+        my_chart
 
                 
-        steps = 75
+        steps = 10
         row_count = 100000
 
         for i in range(steps):
