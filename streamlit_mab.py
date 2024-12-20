@@ -62,7 +62,7 @@ if st.button('Run Performance Simulation'):
         my_chart = st.vega_lite_chart(
             {
                 "mark": "line",
-                "encoding": {"y": "Overall Performance"},
+                "encoding": {"x":"ind_num", "y":"Overall Performance"},
                 "datasets": {
                     "my_df": df_to_display,
                 },
@@ -158,4 +158,4 @@ if st.button('Run Performance Simulation'):
             # initial_df_st.add_rows(curr_table)
             my_chart.add_rows(my_df=curr_table)
 
-            my_chart
+        
