@@ -126,7 +126,8 @@ if st.button('Run Simulation'):
                                                 alt.Color('Metric:N',
                                                          legend=alt.Legend(title="Poop")),
                                                 strokeDash=alt.condition(
-                                                    alt.datum.Type == 'Organic + Optimized'
+                                                        alt.datum.Type == 'Organic + Optimized'
+                                                    )
                                             ).properties(
                                                 height=200
                                             ).interactive()
