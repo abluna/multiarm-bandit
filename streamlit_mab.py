@@ -19,47 +19,47 @@ if st.button('Test App'):
     with st.spinner('Wait for it...'):
         
         for i in [1,2,3,4]:
-        # Create a categorical column with 3 categories
-        categories = ['Category A', 'Category B', 'Category C']
-        categorical_column = np.random.choice(categories, size=50)
+            # Create a categorical column with 3 categories
+            categories = ['Category A', 'Category B', 'Category C']
+            categorical_column = np.random.choice(categories, size=50)
 
-        # Create 4 numeric columns with random numbers
-        ind = list(range(50))
-        numeric_column_1 = np.random.rand(50) * 100 + 100  # Random numbers between 0 and 100
-        numeric_column_2 = np.random.rand(50) * 50 + 100   # Random numbers between 0 and 50
-        numeric_column_3 = np.random.rand(50) * 10 + 100    # Random numbers between 0 and 10
-        numeric_column_4 = np.random.rand(50) * 500 + 100   # Random numbers between 0 and 500
+            # Create 4 numeric columns with random numbers
+            ind = list(range(50))
+            numeric_column_1 = np.random.rand(50) * 100 + 100  # Random numbers between 0 and 100
+            numeric_column_2 = np.random.rand(50) * 50 + 100   # Random numbers between 0 and 50
+            numeric_column_3 = np.random.rand(50) * 10 + 100    # Random numbers between 0 and 10
+            numeric_column_4 = np.random.rand(50) * 500 + 100   # Random numbers between 0 and 500
 
-        # Create a DataFrame
-        data = pd.DataFrame({
-            'Category': categorical_column,
-            'ind':ind,
-            'Numeric_1': numeric_column_1,
-            'Numeric_2': numeric_column_2,
-            'Numeric_3': numeric_column_3,
-            'Numeric_4': numeric_column_4
-        })
+            # Create a DataFrame
+            data = pd.DataFrame({
+                'Category': categorical_column,
+                'ind':ind,
+                'Numeric_1': numeric_column_1,
+                'Numeric_2': numeric_column_2,
+                'Numeric_3': numeric_column_3,
+                'Numeric_4': numeric_column_4
+            })
 
-        data_long = pd.wide_to_long(data, stubnames='Numeric_', i=['Category', 'ind'], j='new_ind').reset_index()
-        
-        if i = 1:
-        
-            data_long_chart1 = data_long[data_long["new_ind"]==i].copy().reset_index()
-            line_chart = alt.Chart(data_long_chart1).mark_line().encode(
-                    alt.X('ind:N', scale=alt.Scale(domain=list(range(100))), title="Round"),
-                    alt.Y('Numeric_:Q', scale=alt.Scale(domainMin=100), title = 'Value'),
-                    alt.Color('new_ind:N',
-                             legend=alt.Legend(title="Poop"))
-                ).properties(
-                    height=200
-                ).interactive()
+            data_long = pd.wide_to_long(data, stubnames='Numeric_', i=['Category', 'ind'], j='new_ind').reset_index()
             
-            my_chart = st.altair_chart(line_chart, use_container_width=True)
+            if i = 1:
             
-        if i > 1
-            
-            new_data = data_long[data_long["new_ind"]==i].copy().reset_index()
-            my_chart.add_rows(new_data)
+                data_long_chart1 = data_long[data_long["new_ind"]==i].copy().reset_index()
+                line_chart = alt.Chart(data_long_chart1).mark_line().encode(
+                        alt.X('ind:N', scale=alt.Scale(domain=list(range(100))), title="Round"),
+                        alt.Y('Numeric_:Q', scale=alt.Scale(domainMin=100), title = 'Value'),
+                        alt.Color('new_ind:N',
+                                 legend=alt.Legend(title="Poop"))
+                    ).properties(
+                        height=200
+                    ).interactive()
+                
+                my_chart = st.altair_chart(line_chart, use_container_width=True)
+                
+            if i > 1
+                
+                new_data = data_long[data_long["new_ind"]==i].copy().reset_index()
+                my_chart.add_rows(new_data)
             
 
 row_count = 100000
