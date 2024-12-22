@@ -30,6 +30,9 @@ with st.sidebar:
         "Select Optimization Method 👉",
         key="visibility",
         options=["Best Variant Assignment", "Probabilistic Assignment"],
+        captions=[
+        "***Assigns the variant with the highest probability (optimizes exploitation)***",
+        "***Assigns variants proportional to expected performance (sacrifices exploitation for more exploration***"]
     )
 
 test_message = mab.mab_test()
