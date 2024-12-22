@@ -155,7 +155,7 @@ if st.button('Run Simulation'):
                                                                                                                                            'Variant_b_performance': ['mean'],
                                                                                                                                            'Variant_c_performance': ['mean']}).reset_index().droplevel(1, axis = 1)
                 new_data = pd.DataFrame({'Metric': ['Overall Performance','All Target','Organic Target'],
-                                         'itr': [i+1,i+1i+1],
+                                         'itr': [i+1,i+1,i+1],
                                          'Value': [overall_performance, org_target_performance, overall_target_performance]})
 
                 my_chart.add_rows(new_data)
