@@ -8,6 +8,15 @@ import altair as alt
 import time
 
 
+
+##################################################
+## Paramaters:                                  ##            
+## Use Max vs. Prob assignment                  ##
+## Show distribution of campaign assignment     ##
+## Learning rate (between 0.5 and 1.5)          ##
+##################################################
+
+
 import warnings
 warnings.simplefilter("ignore", category=FutureWarning)
 pd.set_option('display.max_columns', None)
@@ -15,6 +24,12 @@ pd.set_option('display.max_columns', None)
 st.write("""
 # Multi-Arm Bandit Campaign Simulator
 """)
+
+with st.sidebar:
+    if st.button('Test Side Bar'):
+        st.write("""
+        #### It worked!
+        """)
 
 test_message = mab.mab_test()
 if st.button('Test App'):
