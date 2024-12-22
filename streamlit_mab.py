@@ -4,6 +4,11 @@ import streamlit as st
 import mab
 import sys
 import itertools
+import altair as alt
+
+import warnings
+warnings.simplefilter("ignore", category=FutureWarning)
+pd.set_option('display.max_columns', None)
 
 st.write("""
 # Multi-Arm Bandit Campaign Simulator
@@ -12,27 +17,42 @@ st.write("""
 test_message = mab.mab_test()
 if st.button('Test App'):
     with st.spinner('Wait for it...'):
-        st.write(test_message)
-        chart_data = pd.DataFrame(np.random.randn(200, 3), columns=["a", "b", "c"])
+        
+        # Create a categorical column with 3 categories
+        categories = ['Category A', 'Category B', 'Category C']
+        categorical_column = np.random.choice(categories, size=50)
 
-        st.vega_lite_chart(
-           chart_data,
-           {
-               "mark": {"type": "circle", "tooltip": True},
-               "encoding": {
-                   "x": {"field": "a", "type": "quantitative"},
-                   "y": {"field": "b", "type": "quantitative"},
-                   "size": {"field": "c", "type": "quantitative"},
-                   "color": {"field": "c", "type": "quantitative"},
-               },
-           },
-        )
-                
-    
+        # Create 4 numeric columns with random numbers
+        ind = list(range(50))
+        numeric_column_1 = np.random.rand(50) * 100 + 100  # Random numbers between 0 and 100
+        numeric_column_2 = np.random.rand(50) * 50 + 100   # Random numbers between 0 and 50
+        numeric_column_3 = np.random.rand(50) * 10 + 100    # Random numbers between 0 and 10
+        numeric_column_4 = np.random.rand(50) * 500 + 100   # Random numbers between 0 and 500
 
-event = st.vega_lite_chart(
-    st.session_state.data, spec, key="vega_chart", on_select="rerun"
-)
+        # Create a DataFrame
+        data = pd.DataFrame({
+            'Category': categorical_column,
+            'ind':ind,
+            'Numeric_1': numeric_column_1,
+            'Numeric_2': numeric_column_2,
+            'Numeric_3': numeric_column_3,
+            'Numeric_4': numeric_column_4
+        })
+
+        data.head(5)
+
+        data_long = pd.wide_to_long(data, stubnames='Numeric_', i=['Category', 'ind'], j='new_ind').reset_index()
+
+        line_chart = alt.Chart(data_long).mark_line().encode(
+                alt.X('ind:N', scale=alt.Scale(domain=list(range(100))), title="Round"),
+                alt.Y('Numeric_:Q', scale=alt.Scale(domainMin=100), title = 'Value'),
+                alt.Color('new_ind:N',
+                         legend=alt.Legend(title="Poop"))
+            ).properties(
+                height=200
+            )
+        
+        st.altair_chart(line_chart, use_container_width=True)
 
 row_count = 100000
 seg_cols = ['gender', 'age',
@@ -162,17 +182,5 @@ if st.button('Run Performance Simulation'):
                                         'Organic Variant C Performance':organic_target_performance_variant_c,
                                         'All Variant C Performance':overall_target_performance_variant_c}])
             
-            # initial_df_st.add_rows(curr_table)
-            # initial_df_st = st.table(df_to_display)                             
-            my_chart = st.vega_lite_chart(
-                {
-                    "mark": "line",
-                    "encoding": {"x":"ind_num", "y":"Overall Performance"},
-                    "datasets": {
-                        "my_df": curr_table,
-                    },
-                    "data": {"name": "my_df"},
-                }
-            )
 
         
