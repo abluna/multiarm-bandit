@@ -53,16 +53,12 @@ if st.button('Test App'):
             ).interactive()
         
         my_chart = st.altair_chart(line_chart, use_container_width=True)
-        
-        my_chart
-        
+                
         if st.button('Add Category B'):
         
             data_long_chart2 = data_long[data_long["new_ind"]==2].copy().reset_index()
-            my_chart=my_chart.add_rows(data_long_chart2)
+            my_chart.add_rows(data_long_chart2)
             
-            my_chart
-
 
 row_count = 100000
 seg_cols = ['gender', 'age',
