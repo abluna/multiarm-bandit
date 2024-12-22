@@ -36,7 +36,7 @@ with st.sidebar:
 
 
 ## Parameters for simulation
-steps = 10
+steps = 20
 
 if st.button('Run Simulation'):
     with st.spinner('Running Simulation...'):
