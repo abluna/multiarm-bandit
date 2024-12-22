@@ -93,7 +93,7 @@ if st.button('Run Simulation'):
                 ##################
                 
                 # Set up data
-                chart_data = pd.DataFrame({'Metric': ['Organic Target Only \n(non-optimized)','All Target \n(including optimization)'],
+                chart_data = pd.DataFrame({'Metric': ['Organic Target Only','All Target'],
                                            'itr': [1,1],
                                            'Value': [org_target_performance, overall_target_performance]})
                                            
