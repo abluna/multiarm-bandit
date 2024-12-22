@@ -112,7 +112,7 @@ if st.button('Run Simulation'):
                 my_chart = st.altair_chart(line_chart, use_container_width=True)
                     
                 if include_variant_chart:
-                    chart_data_variant = pd.DataFrame({'Metric': ['Variant A (org)', 'Variant A (org + opt)', 'Variant B (org)', 'Variant B (org + opt)', 'Variant C (org)', 'Variant C (org + opt)'],
+                    chart_data_variant = pd.DataFrame({'Metric': ['Variant A', 'Variant A', 'Variant B', 'Variant B', 'Variant C', 'Variant C'],
                                                        'Type':['Organic', 'Organic + Optimized', 'Organic', 'Organic + Optimized','Organic', 'Organic + Optimized'],
                                                        'itr': [1,1,1,1,1,1],
                                                        'Value': [organic_target_performance_variant_a, overall_target_performance_variant_a,
@@ -187,8 +187,8 @@ if st.button('Run Simulation'):
                 my_chart.add_rows(new_data)
                 
                 if include_variant_chart:
-                    new_chart_data_variant = pd.DataFrame({'Metric': ['Variant A (org)', 'Variant A (org + opt)', 'Variant B (org)', 'Variant B (org + opt)', 'Variant C (org)', 'Variant C (org + opt)'],
-                                                           'Type':['True', 'False', 'True', 'False', 'True', 'False'],
+                    new_chart_data_variant = pd.DataFrame({'Metric': ['Variant A', 'Variant A', 'Variant B', 'Variant B', 'Variant C', 'Variant C'],
+                                                           'Type':['Organic', 'Organic + Optimized', 'Organic', 'Organic + Optimized','Organic', 'Organic + Optimized'],
                                                            'itr': [i+1,i+1,i+1,i+1,i+1,i+1],
                                                            'Value': [organic_target_performance_variant_a, overall_target_performance_variant_a,
                                                                      organic_target_performance_variant_b, overall_target_performance_variant_b,
