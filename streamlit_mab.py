@@ -119,7 +119,7 @@ if st.button('Run Simulation'):
                                                                  organic_target_performance_variant_b, overall_target_performance_variant_b,
                                                                  organic_target_performance_variant_c, overall_target_performance_variant_c]})
                     
-                    line_chart_variant = alt.Chart(chart_data_variant).mark_line()
+                    line_chart_variant = alt.Chart(chart_data_variant).mark_line(
                                             ).encode(
                                                 alt.X('itr:N', scale=alt.Scale(domain=list(range(0,51))), title="Round"),
                                                 alt.Y('Value:Q',scale=alt.Scale(domainMin=0.20), title = 'Performance').axis(format='%'),
