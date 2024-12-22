@@ -37,6 +37,7 @@ with st.sidebar:
 
 ## Parameters for simulation
 steps = 50
+include_variant_chart = True
 
 if st.button('Run Simulation'):
     with st.spinner('Running Simulation...'):
@@ -100,7 +101,7 @@ if st.button('Run Simulation'):
                 line_chart = alt.Chart(chart_data).mark_line(
                                 point=alt.OverlayMarkDef(filled=True, size=15)
                                 ).encode(
-                                    alt.X('itr:N', scale=alt.Scale(domain=list(range(1,50))), title="Round"),
+                                    alt.X('itr:N', scale=alt.Scale(domain=list(range(0,51))), title="Round"),
                                     alt.Y('Value:Q',scale=alt.Scale(domainMin=0.20), title = 'Performance').axis(format='%'),
                                     alt.Color('Metric:N',
                                              legend=alt.Legend(title="Poop"))
@@ -109,6 +110,28 @@ if st.button('Run Simulation'):
                                 ).interactive()
                             
                 my_chart = st.altair_chart(line_chart, use_container_width=True)
+                    
+                if include_variant_chart:
+                    chart_data_variant = pd.DataFrame({'Metric': ['Variant A (org)', 'Variant A (org + opt)', 'Variant B (org)', 'Variant B (org + opt)', 'Variant C (org)', 'Variant C (org + opt)'],
+                                                       'Type':['True', 'False', 'True', 'False', 'True', 'False']
+                                                       'itr': [1,1,1,1,1,1],
+                                                       'Value': [organic_target_performance_variant_a, overall_target_performance_variant_a,
+                                                                 organic_target_performance_variant_b, overall_target_performance_variant_b,
+                                                                 organic_target_performance_variant_c, overall_target_performance_variant_c]})
+                    
+                    line_chart_variant = alt.Chart(chart_data_variant).mark_line(
+                                            point=alt.OverlayMarkDef(filled=True, size=15)
+                                            ).encode(
+                                                alt.X('itr:N', scale=alt.Scale(domain=list(range(0,51))), title="Round"),
+                                                alt.Y('Value:Q',scale=alt.Scale(domainMin=0), title = 'Performance').axis(format='%'),
+                                                alt.Color('Metric:N',
+                                                         legend=alt.Legend(title="Poop")),
+                                                strokeDash="Type:N"
+                                            ).properties(
+                                                height=200
+                                            ).interactive()
+                            
+                    my_chart_variant = st.altair_chart(line_chart_variant, use_container_width=True)
 
                 ### For Next Iteration ###
                 
@@ -161,4 +184,14 @@ if st.button('Run Simulation'):
                                          'Value': [org_target_performance, overall_target_performance]})
 
                 my_chart.add_rows(new_data)
+                
+                if include_variant_chart:
+                    new_chart_data_variant = pd.DataFrame({'Metric': ['Variant A (org)', 'Variant A (org + opt)', 'Variant B (org)', 'Variant B (org + opt)', 'Variant C (org)', 'Variant C (org + opt)'],
+                                                           'Type':['True', 'False', 'True', 'False', 'True', 'False']
+                                                           'itr': [1,1,1,1,1,1],
+                                                           'Value': [organic_target_performance_variant_a, overall_target_performance_variant_a,
+                                                                     organic_target_performance_variant_b, overall_target_performance_variant_b,
+                                                                     organic_target_performance_variant_c, overall_target_performance_variant_c]})
+                    
+                    my_chart_variant.add_rows(new_chart_data_variant)
 
