@@ -57,7 +57,7 @@ if st.button('Test App'):
         if st.button('Add Category B'):
         
             data_long_chart2 = data_long[data_long["new_ind"]==2].copy()
-            line_chart = line_chart.add_rows(data=data_long_chart2)
+            line_chart.add_rows(data=data_long_chart2)
             #st.altair_chart(line_chart, use_container_width=True)
 
 
