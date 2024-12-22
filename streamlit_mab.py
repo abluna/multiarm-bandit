@@ -150,7 +150,6 @@ if st.button('Run Simulation'):
                                                 alt.Y('Value:Q',scale=alt.Scale(domainMin=0.0), title = 'Performance').axis(format='%'),
                                                 alt.Color('Metric:N',
                                                          legend=alt.Legend(title="Variant"))
-                                                    )
                                             ).properties(
                                                 height=300
                                             ).interactive()
