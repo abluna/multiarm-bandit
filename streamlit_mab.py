@@ -41,7 +41,7 @@ if st.button('Test App'):
 
         data_long = pd.wide_to_long(data, stubnames='Numeric_', i=['Category', 'ind'], j='new_ind').reset_index()
         
-        data_long_chart1 = data_long[data_long["Category"]=='Category A']].copy()
+        data_long_chart1 = data_long[data_long["Category"]=='Category A'].copy()
         
         line_chart = alt.Chart(data_long_chart1).mark_line().encode(
                 alt.X('ind:N', scale=alt.Scale(domain=list(range(100))), title="Round"),
@@ -55,7 +55,7 @@ if st.button('Test App'):
         st.altair_chart(line_chart, use_container_width=True)
 if st.button('Add Category B'):
         
-        data_long_chart2 = data_long[data_long["Category"]=='Category B']].copy()
+        data_long_chart2 = data_long[data_long["Category"]=='Category B'].copy()
         my_chart.add_rows(data=data_long_chart2) 
 
 
