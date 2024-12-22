@@ -100,7 +100,7 @@ if st.button('Run Simulation'):
                 line_chart = alt.Chart(chart_data).mark_line(
                                 point=alt.OverlayMarkDef(filled=True, size=15)
                                 ).encode(
-                                    alt.X('itr:N', scale=alt.Scale(domain=list(range(50))), title="Round"),
+                                    alt.X('itr:N', scale=alt.Scale(domain=list(range(1,50))), title="Round"),
                                     alt.Y('Value:Q',scale=alt.Scale(domainMin=0.20), title = 'Performance').axis(format='%'),
                                     alt.Color('Metric:N',
                                              legend=alt.Legend(title="Poop"))
@@ -144,7 +144,6 @@ if st.button('Run Simulation'):
                 organic_target_performance_variant_a = Segment_df_step2.loc[(Segment_df_step2['target_control'] == 'target_org') & (Segment_df_step2['variant_assignment'] == 'Variant A'), 'converted'].mean()
                 organic_target_performance_variant_b = Segment_df_step2.loc[(Segment_df_step2['target_control'] == 'target_org') & (Segment_df_step2['variant_assignment'] == 'Variant B'), 'converted'].mean()
                 organic_target_performance_variant_c = Segment_df_step2.loc[(Segment_df_step2['target_control'] == 'target_org') & (Segment_df_step2['variant_assignment'] == 'Variant C'), 'converted'].mean()
-
 
                 ## For Next Iteration ##
                 
