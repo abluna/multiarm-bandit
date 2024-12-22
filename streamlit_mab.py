@@ -39,11 +39,11 @@ if st.button('Test App'):
             'Numeric_4': numeric_column_4
         })
 
-        data.head(5)
-
         data_long = pd.wide_to_long(data, stubnames='Numeric_', i=['Category', 'ind'], j='new_ind').reset_index()
-
-        line_chart = alt.Chart(data_long).mark_line().encode(
+        
+        data_long_chart1 = data_long[data_long["Category"]=='Category A']].copy()
+        
+        line_chart = alt.Chart(data_long_chart1).mark_line().encode(
                 alt.X('ind:N', scale=alt.Scale(domain=list(range(100))), title="Round"),
                 alt.Y('Numeric_:Q', scale=alt.Scale(domainMin=100), title = 'Value'),
                 alt.Color('new_ind:N',
@@ -53,6 +53,11 @@ if st.button('Test App'):
             )
         
         st.altair_chart(line_chart, use_container_width=True)
+if st.button('Add Category B'):
+        
+        data_long_chart2 = data_long[data_long["Category"]=='Category B']].copy()
+        my_chart.add_rows(data=data_long_chart2) 
+
 
 row_count = 100000
 seg_cols = ['gender', 'age',
