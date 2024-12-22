@@ -104,9 +104,9 @@ if st.button('Run Simulation'):
                                     alt.X('itr:N', scale=alt.Scale(domain=list(range(0,51))), title="Round"),
                                     alt.Y('Value:Q',scale=alt.Scale(domainMin=0.20), title = 'Performance').axis(format='%'),
                                     alt.Color('Metric:N',
-                                             legend=alt.Legend(title="Poop"))
+                                             legend=alt.Legend(title="Targeted Audience"))
                                 ).properties(
-                                    height=200
+                                    height=300
                                 ).interactive()
                             
                 my_chart = st.altair_chart(line_chart, use_container_width=True)
@@ -124,12 +124,12 @@ if st.button('Run Simulation'):
                                                 alt.X('itr:N', scale=alt.Scale(domain=list(range(0,51))), title="Round"),
                                                 alt.Y('Value:Q',scale=alt.Scale(domainMin=0.20), title = 'Performance').axis(format='%'),
                                                 alt.Color('Metric:N',
-                                                         legend=alt.Legend(title="Poop")),
+                                                         legend=alt.Legend(title="Variant")),
                                                 alt.StrokeDash('Type:N',
-                                                               legend=alt.Legend(title="Poop 2")
+                                                               legend=alt.Legend(title="Optimized")
                                                     )
                                             ).properties(
-                                                height=200
+                                                height=300
                                             ).interactive()
                             
                     my_chart_variant = st.altair_chart(line_chart_variant, use_container_width=True)
