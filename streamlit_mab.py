@@ -93,7 +93,7 @@ if st.button('Run Simulation'):
                 ##################
                 
                 # Set up data
-                chart_data = pd.DataFrame({'Metric': ['Organic Target Only (non-optimized)','All Target (including optimization)'],
+                chart_data = pd.DataFrame({'Metric': ['Organic Target Only \n(non-optimized)','All Target \n(including optimization)'],
                                            'itr': [1,1],
                                            'Value': [org_target_performance, overall_target_performance]})
                                            
@@ -103,7 +103,7 @@ if st.button('Run Simulation'):
                                     alt.X('itr:N', scale=alt.Scale(domain=list(range(50))), title="Round"),
                                     alt.Y('Value:Q',scale=alt.Scale(domainMin=0.20), title = 'Performance').axis(format='%'),
                                     alt.Color('Metric:N',
-                                             legend=alt.Legend(title="Poop"))
+                                             legend=alt.Legend(title="Poop", lineBreak=r'\n'))
                                 ).properties(
                                     height=200
                                 ).interactive()
@@ -157,7 +157,7 @@ if st.button('Run Simulation'):
                 perf_scores_all_interactions = Segment_df_step2[Segment_df_step2['target_control'] == 'target_org'].groupby(seg_cols).agg({'Variant_a_performance': ['mean'],
                                                                                                                                            'Variant_b_performance': ['mean'],
                                                                                                                                            'Variant_c_performance': ['mean']}).reset_index().droplevel(1, axis = 1)
-                new_data = pd.DataFrame({'Metric': ['Organic Target Only (non-optimized)','All Target (including optimization)'],
+                new_data = pd.DataFrame({'Metric': ['Organic Target Only \n(non-optimized)','All Target \n(including optimization)'],
                                          'itr': [i+1,i+1],
                                          'Value': [org_target_performance, overall_target_performance]})
 
