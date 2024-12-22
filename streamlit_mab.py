@@ -125,7 +125,7 @@ if st.button('Run Simulation'):
                                                 alt.Y('Value:Q',scale=alt.Scale(domainMin=0.20), title = 'Performance').axis(format='%'),
                                                 alt.Color('Metric:N',
                                                          legend=alt.Legend(title="Poop")),
-                                                alt.strokeDash=("Type:N", title='Optimized')
+                                                alt.strokeDash("Type:N", title='Optimized')
                                             ).properties(
                                                 height=200
                                             ).interactive()
