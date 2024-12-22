@@ -53,10 +53,13 @@ if st.button('Test App'):
             )
         
         st.altair_chart(line_chart, use_container_width=True)
+        
 if st.button('Add Category B'):
         
         data_long_chart2 = data_long[data_long["Category"]=='Category B'].copy()
-        my_chart.add_rows(data=data_long_chart2) 
+        line_chart.add_rows(data=data_long_chart2)
+        
+        st.altair_chart(line_chart, use_container_width=True)
 
 
 row_count = 100000
