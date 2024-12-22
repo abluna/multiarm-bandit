@@ -26,10 +26,11 @@ st.write("""
 """)
 
 with st.sidebar:
-    if st.button('Test Side Bar'):
-        st.write("""
-        #### It worked!
-        """)
+    st.radio(
+        "Select Optimization Method 👉",
+        key="visibility",
+        options=["Best Variant Assignment", "Probabilistic Assignment"],
+    )
 
 test_message = mab.mab_test()
 if st.button('Test App'):
