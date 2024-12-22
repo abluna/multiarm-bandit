@@ -38,6 +38,7 @@ with st.sidebar:
 ## Parameters for simulation
 steps = 50
 include_variant_chart = True
+include_variant_uplift = True
 
 if st.button('Run Simulation'):
     with st.spinner('Running Simulation...'):
@@ -88,6 +89,10 @@ if st.button('Run Simulation'):
                 organic_target_performance_variant_b = Segment_df.loc[(Segment_df['variant_assignment'] != 'Control') & (Segment_df['variant_assignment'] == 'Variant B'), 'converted'].mean()
                 organic_target_performance_variant_c = Segment_df.loc[(Segment_df['variant_assignment'] != 'Control') & (Segment_df['variant_assignment'] == 'Variant C'), 'converted'].mean()
 
+                ## Uplift
+                variant_a_uplift = overall_target_performance_variant_a - organic_target_performance_variant_a
+                variant_b_uplift = overall_target_performance_variant_b - organic_target_performance_variant_b
+                variant_c_uplift = overall_target_performance_variant_c - organic_target_performance_variant_c
 
                 ##################
                 ## INSERT CHART ##
@@ -133,6 +138,24 @@ if st.button('Run Simulation'):
                                             ).interactive()
                             
                     my_chart_variant = st.altair_chart(line_chart_variant, use_container_width=True)
+                    
+                if include_variant_uplift:
+                    chart_data_uplift = pd.DataFrame({'Metric': ['Variant A', 'Variant B', 'Variant C'],
+                                                       'itr': [1,1,1],
+                                                       'Value': [variant_a_uplift, variant_b_uplift, variant_c_uplift]})
+                    
+                    line_chart_uplift = alt.Chart(chart_data_uplift).mark_line(
+                                            ).encode(
+                                                alt.X('itr:N', scale=alt.Scale(domain=list(range(0,51))), title="Round"),
+                                                alt.Y('Value:Q',scale=alt.Scale(domainMin=0.0), title = 'Performance').axis(format='%'),
+                                                alt.Color('Metric:N',
+                                                         legend=alt.Legend(title="Variant"))
+                                                    )
+                                            ).properties(
+                                                height=300
+                                            ).interactive()
+                            
+                    my_chart_uplift = st.altair_chart(chart_data_uplift, use_container_width=True)
 
                 ### For Next Iteration ###
                 
@@ -169,6 +192,11 @@ if st.button('Run Simulation'):
                 organic_target_performance_variant_b = Segment_df_step2.loc[(Segment_df_step2['target_control'] == 'target_org') & (Segment_df_step2['variant_assignment'] == 'Variant B'), 'converted'].mean()
                 organic_target_performance_variant_c = Segment_df_step2.loc[(Segment_df_step2['target_control'] == 'target_org') & (Segment_df_step2['variant_assignment'] == 'Variant C'), 'converted'].mean()
 
+                ## Uplift
+                variant_a_uplift = overall_target_performance_variant_a - organic_target_performance_variant_a
+                variant_b_uplift = overall_target_performance_variant_b - organic_target_performance_variant_b
+                variant_c_uplift = overall_target_performance_variant_c - organic_target_performance_variant_c
+
                 ## For Next Iteration ##
                 
                 # Take the Target group and build an optimization score to determine how ads should be allocated
@@ -196,3 +224,9 @@ if st.button('Run Simulation'):
                     
                     my_chart_variant.add_rows(new_chart_data_variant)
 
+                if include_variant_uplift:
+                    new_chart_data_uplift = pd.DataFrame({'Metric': ['Variant A', 'Variant B', 'Variant C'],
+                                                       'itr': [1,1,1],
+                                                       'Value': [variant_a_uplift, variant_b_uplift, variant_c_uplift]})
+                    
+                    my_chart_uplift.add_rows(new_chart_data_uplift)
