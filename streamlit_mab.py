@@ -154,7 +154,7 @@ if st.button('Run Simulation'):
                                                 height=300
                                             ).interactive()
                             
-                    my_chart_uplift = st.altair_chart(chart_data_uplift, use_container_width=True)
+                    my_chart_uplift = st.altair_chart(line_chart_uplift, use_container_width=True)
 
                 ### For Next Iteration ###
                 
