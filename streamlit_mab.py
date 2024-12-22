@@ -5,6 +5,8 @@ import mab
 import sys
 import itertools
 import altair as alt
+import time
+
 
 import warnings
 warnings.simplefilter("ignore", category=FutureWarning)
@@ -60,6 +62,8 @@ if st.button('Test App'):
                 
                 new_data = data_long[data_long["new_ind"]==i].copy().reset_index()
                 my_chart.add_rows(new_data)
+                
+            time.sleep(5)
             
 
 row_count = 100000
