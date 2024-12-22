@@ -93,7 +93,7 @@ if st.button('Run Simulation'):
                 ##################
                 
                 # Set up data
-                chart_data = pd.DataFrame({'Metric': ['Overall Performance','All Target','Organic Target'],
+                chart_data = pd.DataFrame({'Metric': ['Overall Performance','Organic Target','All Target'],
                                            'itr': [1,1,1],
                                            'Value': [overall_performance, org_target_performance, overall_target_performance]})
                                            
@@ -101,7 +101,7 @@ if st.button('Run Simulation'):
                                 point=alt.OverlayMarkDef(filled=True, size=15)
                                 ).encode(
                                     alt.X('itr:N', scale=alt.Scale(domain=list(range(75))), title="Round"),
-                                    alt.Y('Value:Q', title = 'Performance').axis(format='%'),
+                                    alt.Y('Value:Q',scale=alt.Scale(domainMin=0.20), title = 'Performance').axis(format='%'),
                                     alt.Color('Metric:N',
                                              legend=alt.Legend(title="Poop"))
                                 ).properties(
@@ -157,7 +157,7 @@ if st.button('Run Simulation'):
                 perf_scores_all_interactions = Segment_df_step2[Segment_df_step2['target_control'] == 'target_org'].groupby(seg_cols).agg({'Variant_a_performance': ['mean'],
                                                                                                                                            'Variant_b_performance': ['mean'],
                                                                                                                                            'Variant_c_performance': ['mean']}).reset_index().droplevel(1, axis = 1)
-                new_data = pd.DataFrame({'Metric': ['Overall Performance','All Target','Organic Target'],
+                new_data = pd.DataFrame({'Metric': ['Overall Performance','Organic Target','All Target'],
                                          'itr': [i+1,i+1,i+1],
                                          'Value': [overall_performance, org_target_performance, overall_target_performance]})
 
