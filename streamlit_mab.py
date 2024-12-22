@@ -36,7 +36,7 @@ with st.sidebar:
 
 
 ## Parameters for simulation
-steps = 20
+steps = 50
 
 if st.button('Run Simulation'):
     with st.spinner('Running Simulation...'):
@@ -93,9 +93,9 @@ if st.button('Run Simulation'):
                 ##################
                 
                 # Set up data
-                chart_data = pd.DataFrame({'Metric': ['Overall Performance','Organic Target','All Target'],
-                                           'itr': [1,1,1],
-                                           'Value': [overall_performance, org_target_performance, overall_target_performance]})
+                chart_data = pd.DataFrame({'Metric': ['Organic Target','All Target'],
+                                           'itr': [1,1],
+                                           'Value': [org_target_performance, overall_target_performance]})
                                            
                 line_chart = alt.Chart(chart_data).mark_line(
                                 point=alt.OverlayMarkDef(filled=True, size=15)
@@ -157,9 +157,9 @@ if st.button('Run Simulation'):
                 perf_scores_all_interactions = Segment_df_step2[Segment_df_step2['target_control'] == 'target_org'].groupby(seg_cols).agg({'Variant_a_performance': ['mean'],
                                                                                                                                            'Variant_b_performance': ['mean'],
                                                                                                                                            'Variant_c_performance': ['mean']}).reset_index().droplevel(1, axis = 1)
-                new_data = pd.DataFrame({'Metric': ['Overall Performance','Organic Target','All Target'],
-                                         'itr': [i+1,i+1,i+1],
-                                         'Value': [overall_performance, org_target_performance, overall_target_performance]})
+                new_data = pd.DataFrame({'Metric': ['Organic Target','All Target'],
+                                         'itr': [i+1,i+1],
+                                         'Value': [org_target_performance, overall_target_performance]})
 
                 my_chart.add_rows(new_data)
 
