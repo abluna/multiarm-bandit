@@ -103,7 +103,7 @@ if st.button('Run Simulation'):
                                     alt.X('itr:N', scale=alt.Scale(domain=list(range(50))), title="Round"),
                                     alt.Y('Value:Q',scale=alt.Scale(domainMin=0.20), title = 'Performance').axis(format='%'),
                                     alt.Color('Metric:N',
-                                             legend=alt.Legend(title="Poop", lineBreak=r'\n'))
+                                             legend=alt.Legend(title="Poop"))
                                 ).properties(
                                     height=200
                                 ).interactive()
