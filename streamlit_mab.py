@@ -47,15 +47,17 @@ if st.button('Test App'):
             if i == 1:
             
                 data_long_chart1 = data_long[data_long["ind"]==i].copy().reset_index()
-                line_chart = alt.Chart(data_long_chart1).mark_line().encode(
-                        alt.X('ind:N', scale=alt.Scale(domain=list(range(100))), title="Round"),
-                        alt.Y('Numeric_:Q', scale=alt.Scale(domainMin=100), title = 'Value'),
-                        alt.Color('new_ind:N',
-                                 legend=alt.Legend(title="Poop"))
-                    ).properties(
-                        height=200
-                    ).interactive()
-                
+                line_chart = alt.Chart(data_long_chart1).mark_line(
+                                point=alt.OverlayMarkDef(filled=False, fill="white")
+                                ).encode(
+                                    alt.X('ind:N', scale=alt.Scale(domain=list(range(100))), title="Round"),
+                                    alt.Y('Numeric_:Q', scale=alt.Scale(domainMin=100), title = 'Value').axis(format='%'),
+                                    alt.Color('new_ind:N',
+                                             legend=alt.Legend(title="Poop"))
+                                ).properties(
+                                    height=200
+                                ).interactive()
+                            
                 my_chart = st.altair_chart(line_chart, use_container_width=True)
                 
             if i > 1:
