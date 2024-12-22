@@ -157,7 +157,7 @@ if st.button('Run Simulation'):
                 perf_scores_all_interactions = Segment_df_step2[Segment_df_step2['target_control'] == 'target_org'].groupby(seg_cols).agg({'Variant_a_performance': ['mean'],
                                                                                                                                            'Variant_b_performance': ['mean'],
                                                                                                                                            'Variant_c_performance': ['mean']}).reset_index().droplevel(1, axis = 1)
-                new_data = pd.DataFrame({'Metric': ['Organic Target Only \n(non-optimized)','All Target \n(including optimization)'],
+                new_data = pd.DataFrame({'Metric': ['Organic Target Only','Organic + Optimized'],
                                          'itr': [i+1,i+1],
                                          'Value': [org_target_performance, overall_target_performance]})
 
