@@ -48,7 +48,7 @@ if st.button('Test App'):
             
                 data_long_chart1 = data_long[data_long["ind"]==i].copy().reset_index()
                 line_chart = alt.Chart(data_long_chart1).mark_line(
-                                point=alt.OverlayMarkDef(filled=False, fill="white")
+                                point=alt.OverlayMarkDef(filled=False, fill="white", size15)
                                 ).encode(
                                     alt.X('ind:N', scale=alt.Scale(domain=list(range(100))), title="Round"),
                                     alt.Y('Numeric_:Q', scale=alt.Scale(domainMin=100), title = 'Value').axis(format='%'),
