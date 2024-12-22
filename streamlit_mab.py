@@ -225,7 +225,7 @@ if st.button('Run Simulation'):
 
                 if include_variant_uplift:
                     new_chart_data_uplift = pd.DataFrame({'Metric': ['Variant A', 'Variant B', 'Variant C'],
-                                                       'itr': [1,1,1],
-                                                       'Value': [variant_a_uplift, variant_b_uplift, variant_c_uplift]})
+                                                          'itr': [i+1,i+1,i+1],
+                                                          'Value': [variant_a_uplift, variant_b_uplift, variant_c_uplift]})
                     
                     my_chart_uplift.add_rows(new_chart_data_uplift)
