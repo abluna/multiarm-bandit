@@ -42,7 +42,7 @@ if st.button('Test App'):
 
             data_long = pd.wide_to_long(data, stubnames='Numeric_', i=['Category', 'ind'], j='new_ind').reset_index()
             
-            if i = 1:
+            if i == 1:
             
                 data_long_chart1 = data_long[data_long["new_ind"]==i].copy().reset_index()
                 line_chart = alt.Chart(data_long_chart1).mark_line().encode(
@@ -56,7 +56,7 @@ if st.button('Test App'):
                 
                 my_chart = st.altair_chart(line_chart, use_container_width=True)
                 
-            if i > 1
+            if i > 1:
                 
                 new_data = data_long[data_long["new_ind"]==i].copy().reset_index()
                 my_chart.add_rows(new_data)
