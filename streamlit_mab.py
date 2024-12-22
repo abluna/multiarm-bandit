@@ -20,7 +20,7 @@ test_message = mab.mab_test()
 if st.button('Test App'):
     with st.spinner('Wait for it...'):
         
-        for i in [1,2,3,4]:
+        for i in range(50):
             # Create a categorical column with 3 categories
             categories = ['Category A', 'Category B', 'Category C']
             categorical_column = np.random.choice(categories, size=50)
@@ -46,7 +46,7 @@ if st.button('Test App'):
             
             if i == 1:
             
-                data_long_chart1 = data_long[data_long["new_ind"]==i].copy().reset_index()
+                data_long_chart1 = data_long[data_long["ind"]==i].copy().reset_index()
                 line_chart = alt.Chart(data_long_chart1).mark_line().encode(
                         alt.X('ind:N', scale=alt.Scale(domain=list(range(100))), title="Round"),
                         alt.Y('Numeric_:Q', scale=alt.Scale(domainMin=100), title = 'Value'),
@@ -60,7 +60,7 @@ if st.button('Test App'):
                 
             if i > 1:
                 
-                new_data = data_long[data_long["new_ind"]==i].copy().reset_index()
+                new_data = data_long[data_long["ind"]==i].copy().reset_index()
                 my_chart.add_rows(new_data)
                 
             time.sleep(5)
