@@ -126,7 +126,7 @@ if st.button('Run Simulation'):
                                                 alt.Color('Metric:N',
                                                          legend=alt.Legend(title="Poop")),
                                                 alt.StrokeDash('Type:N',
-                                                               condition=alt.datum.Type == 'Organic',
+                                                               condition=alt.condition(alt.datum.Type == 'Organic',alt.value([5, 5]),alt.value([0])),
                                                                legend=alt.Legend(title="Poop 2")
                                                     )
                                             ).properties(
