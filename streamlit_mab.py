@@ -113,7 +113,7 @@ if st.button('Run Simulation'):
                     
                 if include_variant_chart:
                     chart_data_variant = pd.DataFrame({'Metric': ['Variant A (org)', 'Variant A (org + opt)', 'Variant B (org)', 'Variant B (org + opt)', 'Variant C (org)', 'Variant C (org + opt)'],
-                                                       'Type':['True', 'False', 'True', 'False', 'True', 'False'],
+                                                       'Type':['Organic', 'Organic + Optimized', 'Organic', 'Organic + Optimized','Organic', 'Organic + Optimized'],
                                                        'itr': [1,1,1,1,1,1],
                                                        'Value': [organic_target_performance_variant_a, overall_target_performance_variant_a,
                                                                  organic_target_performance_variant_b, overall_target_performance_variant_b,
@@ -125,7 +125,7 @@ if st.button('Run Simulation'):
                                                 alt.Y('Value:Q',scale=alt.Scale(domainMin=0.20), title = 'Performance').axis(format='%'),
                                                 alt.Color('Metric:N',
                                                          legend=alt.Legend(title="Poop")),
-                                                strokeDash="Type:N"
+                                                alt.strokeDash=("Type:N", title='Optimized')
                                             ).properties(
                                                 height=200
                                             ).interactive()
@@ -187,7 +187,7 @@ if st.button('Run Simulation'):
                 if include_variant_chart:
                     new_chart_data_variant = pd.DataFrame({'Metric': ['Variant A (org)', 'Variant A (org + opt)', 'Variant B (org)', 'Variant B (org + opt)', 'Variant C (org)', 'Variant C (org + opt)'],
                                                            'Type':['True', 'False', 'True', 'False', 'True', 'False'],
-                                                           'itr': [1,1,1,1,1,1],
+                                                           'itr': [i+1,i+1,i+1,i+1,i+1,i+1],
                                                            'Value': [organic_target_performance_variant_a, overall_target_performance_variant_a,
                                                                      organic_target_performance_variant_b, overall_target_performance_variant_b,
                                                                      organic_target_performance_variant_c, overall_target_performance_variant_c]})
