@@ -147,11 +147,14 @@ if st.button('Run Simulation'):
                     line_chart_uplift = alt.Chart(chart_data_uplift).mark_line(
                                             ).encode(
                                                 alt.X('itr:N', scale=alt.Scale(domain=list(range(0,51))), title="Round"),
-                                                alt.Y('Value:Q',scale=alt.Scale(domainMin=0.0), title = 'Performance').axis(format='%'),
+                                                alt.Y('Value:Q',scale=alt.Scale(domainMin=0.0), title = 'Performance').axis(format='+%'),
                                                 alt.Color('Metric:N',
                                                          legend=alt.Legend(title="Variant"))
                                             ).properties(
-                                                height=300
+                                                height=300,
+                                                title={
+                                                    'text': ["Optimization Uplift"]
+                                                }
                                             ).interactive()
                             
                     my_chart_uplift = st.altair_chart(line_chart_uplift, use_container_width=True)
