@@ -109,7 +109,11 @@ if st.button('Run Simulation'):
                                     alt.X('itr:N', scale=alt.Scale(domain=list(range(0,51))), title="Round"),
                                     alt.Y('Value:Q',scale=alt.Scale(domainMin=0.20), title = 'Performance').axis(format='%'),
                                     alt.Color('Metric:N',
-                                             legend=alt.Legend(title="Targeted Audience"))
+                                             legend=alt.Legend(title="Targeted Audience",
+                                                                orient='none',
+                                                                legendX=130, legendY=-40,
+                                                                direction='horizontal',
+                                                                titleAnchor='middle'))
                                 ).properties(
                                     height=300
                                 ).configure_legend(
