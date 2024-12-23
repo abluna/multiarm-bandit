@@ -111,7 +111,7 @@ if st.button('Run Simulation'):
                                     alt.Color('Metric:N',
                                              legend=alt.Legend(title="Targeted Audience",
                                                                 orient='none',
-                                                                legendX=130, legendY=-40,
+                                                                #legendX=130, legendY=-40,
                                                                 direction='horizontal',
                                                                 titleAnchor='middle'))
                                 ).properties(
