@@ -161,6 +161,7 @@ if st.button('Run Simulation'):
                                                 title={
                                                     'text': ["Optimization Uplift"]
                                                 }
+                                            ).configure_legend(labelLimit = 3
                                             ).interactive()
                             
                     my_chart_uplift = st.altair_chart(line_chart_uplift, use_container_width=True)
