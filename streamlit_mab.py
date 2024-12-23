@@ -115,11 +115,11 @@ if st.button('Run Simulation'):
                                                                 direction='horizontal',
                                                                 titleAnchor='middle'))
                                 ).properties(
-                                    height=300
-                                ).configure_legend(
-                                    gradientLength=400,
-                                    gradientThickness=30
-                                ) .interactive()
+                                    height=300,
+                                    title={
+                                        'text': ["Performance by Target Audience"]
+                                    }
+                                ).interactive()
                             
                 my_chart = st.altair_chart(line_chart, use_container_width=True)
                     
@@ -141,7 +141,10 @@ if st.button('Run Simulation'):
                                                                legend=alt.Legend(title="Optimized")
                                                     )
                                             ).properties(
-                                                height=300
+                                                height=300,
+                                                title={
+                                                    'text': ["Performance by Variant"]
+                                                }
                                             ).interactive()
                             
                     my_chart_variant = st.altair_chart(line_chart_variant, use_container_width=True)
