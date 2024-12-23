@@ -109,7 +109,7 @@ if st.button('Run Simulation'):
                                     alt.X('itr:N', scale=alt.Scale(domain=list(range(0,51))), title="Round"),
                                     alt.Y('Value:Q',scale=alt.Scale(domainMin=0.20), title = 'Performance').axis(format='%'),
                                     alt.Color('Metric:N',
-                                             legend=alt.Legend(title="Targeted Audience", titleFontSize=18))
+                                             legend=alt.Legend(title="Targeted Audience", titleFontSize=16))
                                 ).properties(
                                     height=300,
                                     title={
@@ -132,9 +132,9 @@ if st.button('Run Simulation'):
                                                 alt.X('itr:N', scale=alt.Scale(domain=list(range(0,51))), title="Round"),
                                                 alt.Y('Value:Q',scale=alt.Scale(domainMin=0.20), title = 'Performance').axis(format='%'),
                                                 alt.Color('Metric:N',
-                                                         legend=alt.Legend(title="Variant")),
+                                                         legend=alt.Legend(title="Variant", titleFontSize=16)),
                                                 alt.StrokeDash('Type:N',
-                                                               legend=alt.Legend(title="Optimized")
+                                                               legend=alt.Legend(title="Optimized", titleFontSize=16)
                                                     )
                                             ).properties(
                                                 height=300,
@@ -155,7 +155,7 @@ if st.button('Run Simulation'):
                                                 alt.X('itr:N', scale=alt.Scale(domain=list(range(0,51))), title="Round"),
                                                 alt.Y('Value:Q',scale=alt.Scale(domainMin=0.0), title = 'Performance').axis(format='+%'),
                                                 alt.Color('Metric:N',
-                                                         legend=alt.Legend(title="Variant"))
+                                                         legend=alt.Legend(title="Variant", titleFontSize=16))
                                             ).properties(
                                                 height=300,
                                                 title={
