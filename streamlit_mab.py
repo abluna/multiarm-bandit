@@ -103,7 +103,7 @@ if st.button('Run Simulation'):
                                            'itr': [1,1],
                                            'Value': [org_target_performance, overall_target_performance]})
                                            
-                line_chart = alt.Chart(chart_data).mark_line(
+                line_chart = alt.Chart(chart_data, title="Performance by Target Audience").mark_line(
                                 point=alt.OverlayMarkDef(filled=True, size=15)
                                 ).encode(
                                     alt.X('itr:N', scale=alt.Scale(domain=list(range(0,51))), title="Round"),
@@ -111,11 +111,9 @@ if st.button('Run Simulation'):
                                     alt.Color('Metric:N',
                                              legend=alt.Legend(title="Targeted Audience", titleFontSize=16))
                                 ).properties(
-                                    height=300,
-                                    title={
-                                        'text': ["Performance by Target Audience"]
+                                    height=300
                                     }
-                                ).configure_header(titleAlign='center').interactive()
+                                ).interactive()
                             
                 my_chart = st.altair_chart(line_chart, use_container_width=True)
                     
