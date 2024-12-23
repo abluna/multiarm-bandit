@@ -112,7 +112,10 @@ if st.button('Run Simulation'):
                                              legend=alt.Legend(title="Targeted Audience"))
                                 ).properties(
                                     height=300
-                                ).interactive()
+                                ).configure_legend(
+                                    gradientLength=400,
+                                    gradientThickness=30
+                                ) .interactive()
                             
                 my_chart = st.altair_chart(line_chart, use_container_width=True)
                     
