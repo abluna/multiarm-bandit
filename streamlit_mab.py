@@ -146,7 +146,7 @@ if st.button('Run Simulation'):
                     my_chart_variant = st.altair_chart(line_chart_variant, use_container_width=True)
                     
                 if include_variant_uplift:
-                    chart_data_uplift = pd.DataFrame({'Metric': ['Variant A                ', 'Variant B', 'Variant C'],
+                    chart_data_uplift = pd.DataFrame({'Metric': ['Variant A                .', 'Variant B', 'Variant C'],
                                                        'itr': [1,1,1],
                                                        'Value': [variant_a_uplift, variant_b_uplift, variant_c_uplift]})
                     
@@ -161,7 +161,7 @@ if st.button('Run Simulation'):
                                                 title={
                                                     'text': ["Optimization Uplift"]
                                                 }
-                                            ).configure_legend(labelLimit = 10).interactive()
+                                            ).interactive()
                             
                     my_chart_uplift = st.altair_chart(line_chart_uplift, use_container_width=True)
 
@@ -233,7 +233,7 @@ if st.button('Run Simulation'):
                     my_chart_variant.add_rows(new_chart_data_variant)
 
                 if include_variant_uplift:
-                    new_chart_data_uplift = pd.DataFrame({'Metric': ['Variant A                ', 'Variant B', 'Variant C'],
+                    new_chart_data_uplift = pd.DataFrame({'Metric': ['Variant A                .', 'Variant B', 'Variant C'],
                                                           'itr': [i+1,i+1,i+1],
                                                           'Value': [variant_a_uplift, variant_b_uplift, variant_c_uplift]})
                     
