@@ -115,7 +115,7 @@ if st.button('Run Simulation'):
                                     title={
                                         'text': ["Performance by Target Audience"]
                                     }
-                                ).interactive()
+                                ).configure_header(titleAlign='center').interactive()
                             
                 my_chart = st.altair_chart(line_chart, use_container_width=True)
                     
