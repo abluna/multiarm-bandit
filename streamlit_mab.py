@@ -33,7 +33,7 @@ with st.sidebar:
 
     data_df = pd.DataFrame(
         {
-            "Output": ["Show Performance by Variant Chart", "Show Uplift by Variant Chart", "Show Variant Assignment by Cohort"],
+            "Show in Output": ["Performance by Variant", "Uplift by Variant", "Variant Assignment by Cohort"],
             "Include": [True, False, False],
         }
     )
@@ -42,7 +42,7 @@ with st.sidebar:
         data_df,
         column_config={
             "Include": st.column_config.CheckboxColumn(
-                "Include in Output",
+                "Include",
                 help="Check if you want to see this output",
                 default=False,
             )
