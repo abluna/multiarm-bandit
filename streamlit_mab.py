@@ -7,15 +7,12 @@ import itertools
 import altair as alt
 import time
 
-
-
 ##################################################
-## Paramaters:                                  ##            
+## Parameters:                                  ##
 ## Use Max vs. Prob assignment                  ##
 ## Show distribution of campaign assignment     ##
 ## Learning rate (between 0.5 and 1.5)          ##
 ##################################################
-
 
 import warnings
 warnings.simplefilter("ignore", category=FutureWarning)
@@ -33,6 +30,28 @@ with st.sidebar:
         "***Assigns the variant with the highest probability (optimizes exploitation)***",
         "***Assigns variants proportional to expected performance (sacrifices exploitation for more exploration)***"]
     )
+
+    data_df = pd.DataFrame(
+        {
+            "Output": ["Show Performance by Variant Chart", "Show Uplift by Variant Chart", "Show Variant Assignment by Cohort"],
+            "Include": [True, False, False],
+        }
+    )
+
+    st.data_editor(
+        data_df,
+        column_config={
+            "Include": st.column_config.CheckboxColumn(
+                "Include in Output",
+                help="Check if you want to see this output",
+                default=False,
+            )
+        },
+        hide_index=True,
+    )
+
+
+
 
 
 ## Parameters for simulation
