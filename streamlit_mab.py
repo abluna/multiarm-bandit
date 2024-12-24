@@ -24,7 +24,7 @@ st.write("""
 
 with st.sidebar:
     st.radio(
-        "##Select Optimization Method 👉",
+        "Select Optimization Method 👉",
         options=["Best Variant Assignment", "Probabilistic Assignment"],
         captions=[
         "***Assigns the variant with the highest probability (optimizes exploitation)***",
@@ -33,7 +33,7 @@ with st.sidebar:
 
     st.divider()
 
-    learn_rate = st.slider("Optimization Rate", 0, 100, 50)
+    learn_rate = st.slider("Optimization Rate", 0, 100, 50, label_visibility="visible", help='help goes here')
     learn_rate = (learn_rate + 50) / 100
 
     st.divider()
