@@ -146,13 +146,16 @@ if st.button('Run Simulation'):
                 my_chart = st.altair_chart(line_chart, use_container_width=True)
                     
                 if include_variant_chart:
+
                     chart_data_variant = pd.DataFrame({'Metric': ['Variant A', 'Variant A', 'Variant B', 'Variant B', 'Variant C', 'Variant C'],
                                                        'Type':['Organic', 'Organic + Optimized', 'Organic', 'Organic + Optimized','Organic', 'Organic + Optimized'],
                                                        'itr': [1,1,1,1,1,1],
                                                        'Value': [organic_target_performance_variant_a, overall_target_performance_variant_a,
                                                                  organic_target_performance_variant_b, overall_target_performance_variant_b,
                                                                  organic_target_performance_variant_c, overall_target_performance_variant_c]})
-                    
+
+                    st.divider()
+
                     line_chart_variant = alt.Chart(chart_data_variant).mark_line(
                                             ).encode(
                                                 alt.X('itr:N', scale=alt.Scale(domain=list(range(0,51))), title="Round"),
@@ -176,7 +179,9 @@ if st.button('Run Simulation'):
                     chart_data_uplift = pd.DataFrame({'Metric': ['Variant A                   ‎ ', 'Variant B', 'Variant C'],
                                                        'itr': [1,1,1],
                                                        'Value': [variant_a_uplift, variant_b_uplift, variant_c_uplift]})
-                    
+
+                    st.divider()
+
                     line_chart_uplift = alt.Chart(chart_data_uplift).mark_line(
                                             ).encode(
                                                 alt.X('itr:N', scale=alt.Scale(domain=list(range(0,51))), title="Round"),
