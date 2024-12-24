@@ -31,6 +31,8 @@ with st.sidebar:
         "***Assigns variants proportional to expected performance (sacrifices exploitation for more exploration)***"]
     )
 
+    st.divider()
+
     st.write("""
     Choose Output
     """)
@@ -41,6 +43,8 @@ with st.sidebar:
             "Include": [True, False, False],
         }
     )
+
+    st.divider()
 
     st.data_editor(
         data_df,
