@@ -24,7 +24,7 @@ st.write("""
 
 with st.sidebar:
     st.radio(
-        "Select Optimization Method 👉",
+        "##Select Optimization Method 👉",
         options=["Best Variant Assignment", "Probabilistic Assignment"],
         captions=[
         "***Assigns the variant with the highest probability (optimizes exploitation)***",
