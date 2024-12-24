@@ -31,6 +31,10 @@ with st.sidebar:
         "***Assigns variants proportional to expected performance (sacrifices exploitation for more exploration)***"]
     )
 
+    st.write("""
+    Choose Output
+    """)
+
     data_df = pd.DataFrame(
         {
             "Show in Output": ["Performance by Variant", "Variant Assignment by Cohort", "Uplift by Variant"],
