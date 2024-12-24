@@ -202,7 +202,7 @@ if st.button('Run Simulation'):
                                                 	).configure_title(fontSize=16, orient='top', anchor='middle'
                                                 	).interactive()
 	
-                        my_chart_uplift = st.altair_chart(line_chart_uplift, use_container_width=True)
+                    	my_chart_uplift = st.altair_chart(line_chart_uplift, use_container_width=True)
 
                     ### For Next Iteration ###
 
