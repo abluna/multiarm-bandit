@@ -52,7 +52,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/streamlit_mab.py</url>
-          <line>231</line>
+          <line>233</line>
           <option name="timeStamp" value="3" />
         </line-breakpoint>
       </breakpoints>

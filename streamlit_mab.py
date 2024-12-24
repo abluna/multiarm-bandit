@@ -33,9 +33,12 @@ with st.sidebar:
 
     st.divider()
 
-    st.write("""
-    Choose Output
-    """)
+    learn_rate = st.slider("Optimization Rate", 0, 100, 50)
+    learn_rate = (learn_rate + 50) / 100
+
+    st.divider()
+
+    st.write("Choose Output")
 
     data_df = pd.DataFrame(
         {
@@ -43,8 +46,6 @@ with st.sidebar:
             "Include": [True, False, False],
         }
     )
-
-    st.divider()
 
     st.data_editor(
         data_df,
@@ -58,8 +59,9 @@ with st.sidebar:
         hide_index=True,
     )
 
-    learn_rate = st.slider("Optimization Rate", 0, 100, 50)
-    learn_rate = (learn_rate + 50) / 100
+    st.divider()
+
+
 
 ## Parameters for simulation
 steps = 50
