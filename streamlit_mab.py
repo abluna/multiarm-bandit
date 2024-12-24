@@ -18,9 +18,7 @@ import warnings
 warnings.simplefilter("ignore", category=FutureWarning)
 pd.set_option('display.max_columns', None)
 
-st.write("""
-## Multi-Arm Bandit Campaign Simulator
-""")
+st.markdown("<h1 style='text-align: center; color: grey;'>Multi-Armed Bandit Campaign Simulator</h1>", unsafe_allow_html=True)
 
 with st.sidebar:
     st.radio(
@@ -184,6 +182,9 @@ if st.button('Run Simulation'):
                         my_chart_variant = st.altair_chart(line_chart_variant, use_container_width=True)
 
                     if include_variant_uplift:
+                    
+                    	st.divider()
+                    
                         chart_data_uplift = pd.DataFrame({'Metric': ['Variant A                   ‎ ', 'Variant B', 'Variant C'],
                                                            'itr': [1,1,1],
                                                            'Value': [variant_a_uplift, variant_b_uplift, variant_c_uplift]})
