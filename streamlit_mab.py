@@ -188,20 +188,20 @@ if st.button('Run Simulation'):
                                                            'itr': [1,1,1],
                                                            'Value': [variant_a_uplift, variant_b_uplift, variant_c_uplift]})
 
-                        line_chart_uplift = alt.Chart(chart_data_uplift).mark_line(
-                                                ).encode(
+                    	line_chart_uplift = alt.Chart(chart_data_uplift).mark_line(
+                                                	).encode(
                                                     alt.X('itr:N', scale=alt.Scale(domain=list(range(0,51))), title="Round"),
                                                     alt.Y('Value:Q',scale=alt.Scale(domainMin=0), title = 'Performance').axis(format='+%'),
                                                     alt.Color('Metric:N',
                                                              legend=alt.Legend(title="Variant", titleFontSize=16))
-                                                ).properties(
+                                                	).properties(
                                                     height=300,
                                                     title={
                                                         'text': ["Optimization Uplift"]
                                                     }
-                                                ).configure_title(fontSize=16, orient='top', anchor='middle'
-                                                ).interactive()
-
+                                                	).configure_title(fontSize=16, orient='top', anchor='middle'
+                                                	).interactive()
+	
                         my_chart_uplift = st.altair_chart(line_chart_uplift, use_container_width=True)
 
                     ### For Next Iteration ###
