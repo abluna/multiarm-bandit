@@ -19,7 +19,7 @@ warnings.simplefilter("ignore", category=FutureWarning)
 pd.set_option('display.max_columns', None)
 
 st.markdown("<h2 style='text-align: center; color: grey;'>Multi-Armed Bandit Campaign Simulator</h2>", unsafe_allow_html=True)
-st.markdown("<h4 style='text-align: justify; color: grey;'>placerholder</h4>", unsafe_allow_html=True)
+st.markdown(":gray[placeholder text placeholder text placeholder text placeholder text placeholder text placeholder text placeholder text placeholder text placeholder text]")
 
 
 with st.sidebar:
