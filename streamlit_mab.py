@@ -182,10 +182,9 @@ if st.button('Run Simulation'):
                         my_chart_variant = st.altair_chart(line_chart_variant, use_container_width=True)
 
                     if include_variant_uplift:
-                    
+                    	                    
                     	st.divider()
-                    
-                        chart_data_uplift = pd.DataFrame({'Metric': ['Variant A                   ‎ ', 'Variant B', 'Variant C'],
+                    	chart_data_uplift = pd.DataFrame({'Metric': ['Variant A                   ‎ ', 'Variant B', 'Variant C'],
                                                            'itr': [1,1,1],
                                                            'Value': [variant_a_uplift, variant_b_uplift, variant_c_uplift]})
 
