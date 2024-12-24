@@ -19,7 +19,7 @@ warnings.simplefilter("ignore", category=FutureWarning)
 pd.set_option('display.max_columns', None)
 
 st.write("""
-# Multi-Arm Bandit Campaign Simulator
+## Multi-Arm Bandit Campaign Simulator
 """)
 
 with st.sidebar:
@@ -188,8 +188,6 @@ if st.button('Run Simulation'):
                                                            'itr': [1,1,1],
                                                            'Value': [variant_a_uplift, variant_b_uplift, variant_c_uplift]})
 
-                        ç
-
                         line_chart_uplift = alt.Chart(chart_data_uplift).mark_line(
                                                 ).encode(
                                                     alt.X('itr:N', scale=alt.Scale(domain=list(range(0,51))), title="Round"),
@@ -219,6 +217,7 @@ if st.button('Run Simulation'):
                                                                                      'Variant_c_performance': ['mean']}).reset_index().droplevel(1, axis = 1)
 
                 with tab2:
+
                     st.text("placeholder")
 
             if i > 0:
