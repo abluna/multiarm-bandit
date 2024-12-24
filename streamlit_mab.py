@@ -33,7 +33,7 @@ with st.sidebar:
 
     data_df = pd.DataFrame(
         {
-            "Show in Output": ["Performance by Variant", "Uplift by Variant", "Variant Assignment by Cohort"],
+            "Show in Output": ["Performance by Variant", "Variant Assignment by Cohort", "Uplift by Variant"],
             "Include": [True, False, False],
         }
     )
@@ -50,9 +50,8 @@ with st.sidebar:
         hide_index=True,
     )
 
-
-
-
+    learn_rate = st.slider("Optimization Rate", 0, 100, 50)
+    learn_rate = (learn_rate + 50) / 100
 
 ## Parameters for simulation
 steps = 50
