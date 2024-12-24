@@ -218,7 +218,7 @@ if st.button('Run Simulation'):
 
                 with tab2:
 
-                    st.text("placeholder")
+                    st.text("placeholder for table")
 
             if i > 0:
 
