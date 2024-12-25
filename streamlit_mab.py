@@ -289,5 +289,6 @@ if st.button('Run Simulation'):
                         curr_table = pd.concat([org_table, opt_table], axis =1 )
 
                         with st.empty():
-                            st.write("On iteration ",i+1," out of ", steps)
-                            st.dataframe(curr_table, height=5000)
+                            curr_message = "On iteration " + i+1, + " out of " +  steps
+                            st.write(curr_message)
+                            st.dataframe(curr_table, height=1000)
