@@ -223,7 +223,7 @@ if st.button('Run Simulation'):
             if i > 0:
 
                 Segment_df_step2 = mab.create_synthetic_sample(row_count=row_count)
-                Segment_df_step2 = mab.assignment_with_optimization(df=Segment_df_step2, prior_performance_scores=perf_scores_all_interactions,seg_cols=seg_cols,method='max', opt_target_size=learn_rate, learning_weight=2)
+                Segment_df_step2 = mab.assignment_with_optimization(df=Segment_df_step2, prior_performance_scores=perf_scores_all_interactions,seg_cols=seg_cols,method='max', opt_target_size=i/100, learning_weight=2)
                 Segment_df_step2 = mab.add_conversion_rates(df=Segment_df_step2, seg_cols=seg_cols, segments=segments, all_combos_weights=combo_weights, print_diagnostics=False, assign_variant=False)
                 Segment_df_step2 = Segment_df_step2.reset_index(drop=True)
 

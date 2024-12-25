@@ -367,7 +367,6 @@ def draw_histogram(n_array, n_bins=50):
     # Display the histogram
     plt.show()
 
-
 def get_variant_assignment_counts(df, table_name, seg_cols):
 
     import pandas as pd
