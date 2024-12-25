@@ -24,13 +24,18 @@ st.markdown(":gray[placeholder text placeholder text placeholder text placeholde
 
 
 with st.sidebar:
-    st.radio(
-        "Select Optimization Method 👉",
-        options=["Best Variant Assignment", "Probabilistic Assignment"],
-        captions=[
-        "***Assigns the variant with the highest probability (optimizes exploitation)***",
-        "***Assigns variants proportional to expected performance (sacrifices exploitation for more exploration)***"]
-    )
+    opt_method = st.radio(
+                          "Select Optimization Method 👉",
+                          options=["Best Variant Assignment", "Probabilistic Assignment"],
+                          captions=[
+                                    "***Assigns the variant with the highest probability (optimizes exploitation)***",
+                                    "***Assigns variants proportional to expected performance (sacrifices exploitation for more exploration)***"]
+                    )
+
+    if opt_method == "Best Variant Assignment":
+        optimization_method = 'max'
+    if opt_method == "Best Variant Assignment":
+        optimization_method = 'prob'
 
     st.divider()
 
@@ -62,11 +67,6 @@ with st.sidebar:
     include_variant_chart = parameters_df.loc[parameters_df['Show'] == "Performance by Variant"]['Include'].values
     include_variant_uplift = parameters_df.loc[parameters_df['Show'] == "Uplift by Variant"]['Include'].values
     include_cohort_tables = parameters_df.loc[parameters_df['Show'] == "Variant Assignment by Cohort"]['Include'].values
-
-    if include_variant_chart:
-        st.write("It's True")
-
-
 
     st.divider()
 
@@ -231,7 +231,7 @@ if st.button('Run Simulation'):
             if i > 0:
 
                 Segment_df_step2 = mab.create_synthetic_sample(row_count=row_count)
-                Segment_df_step2 = mab.assignment_with_optimization(df=Segment_df_step2, prior_performance_scores=perf_scores_all_interactions,seg_cols=seg_cols,method='max', opt_target_size= (learn_rate * i) / 100, learning_weight=2)
+                Segment_df_step2 = mab.assignment_with_optimization(df=Segment_df_step2, prior_performance_scores=perf_scores_all_interactions,seg_cols=seg_cols,method=optimization_method, opt_target_size= (learn_rate * i) / 100, learning_weight=2)
                 Segment_df_step2 = mab.add_conversion_rates(df=Segment_df_step2, seg_cols=seg_cols, segments=segments, all_combos_weights=combo_weights, print_diagnostics=False, assign_variant=False)
                 Segment_df_step2 = Segment_df_step2.reset_index(drop=True)
 
