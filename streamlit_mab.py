@@ -296,11 +296,8 @@ if st.button('Run Simulation'):
 
                             ## Make a couple style changes
                             curr_table = curr_table.style.format('{:,.0%}')
-                            curr_table = curr_table.style.set_properties(**{
-                                #"background-color": "white",
-                                #"color": "black",
-                                #"border-color": "black",
-                                'text-align': 'center'
-                            })
+                            curr_table = curr_table.style.background_gradient(cmap='Blues')
 
-                            st.write(curr_table.to_html(), unsafe_allow_html=True)
+                            st.dataframe(curr_table
+                                         height=650,
+                                         use_container_width=True)
