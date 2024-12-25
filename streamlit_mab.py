@@ -34,9 +34,9 @@ with st.sidebar:
 
     st.divider()
 
-    learn_rate = st.slider("Optimization Rate", 0, 100, 50, label_visibility="visible", help='The higher the value, the faster the optimization occurs, but the chances of truly optimizing is lower')
+    learn_rate = st.slider("Optimization Rate", 1, 100, 50, label_visibility="visible", help='The higher the value, the faster the optimization occurs, but the chances of truly optimizing is lower')
     learn_rate = (learn_rate + 50) / 100
-
+    st.write(learn_rate)
     st.divider()
 
     st.write("Display Output")
