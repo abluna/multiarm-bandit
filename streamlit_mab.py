@@ -70,7 +70,7 @@ include_variant_uplift = True
 include_cohort_tables = True
 
 if include_cohort_tables:
-    tab1, tab2 = st.tabs(["Charts", "Table"])
+    tab1, tab2 = st.tabs(["Optimization Charts", "Variant Assignment"])
 else:
     tab1 = st.tabs(["Charts"])
 
@@ -218,10 +218,6 @@ if st.button('Run Simulation'):
                                                                                      'Variant_b_performance': ['mean'],
                                                                                      'Variant_c_performance': ['mean']}).reset_index().droplevel(1, axis = 1)
 
-                with tab2:
-
-                    st.text("placeholder for table")
-
             if i > 0:
 
                 Segment_df_step2 = mab.create_synthetic_sample(row_count=row_count)
@@ -283,3 +279,12 @@ if st.button('Run Simulation'):
                                                           'Value': [variant_a_uplift, variant_b_uplift, variant_c_uplift]})
 
                     my_chart_uplift.add_rows(new_chart_data_uplift)
+                
+                if include_cohort_tables:       
+                	with tab2:
+						
+						org_table = mab.get_variant_assignment_counts(df = Segment_df_step2[Segment_df_step2['target_control'] != 'target_org'], table_name='Optimized', seg_cols=seg_cols)
+						opt_table = mab.get_variant_assignment_counts(df = Segment_df_step2[Segment_df_step2['target_control'] != 'target_opt'], table_name='Organic', seg_cols=seg_cols)
+						curr_table = pd.concat([org_table, opt_table], axis =1 )
+
+                    	st.dataframe(curr_table)

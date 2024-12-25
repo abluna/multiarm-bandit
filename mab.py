@@ -366,3 +366,33 @@ def draw_histogram(n_array, n_bins=50):
 
     # Display the histogram
     plt.show()
+
+
+def get_variant_assignment_counts(df, table_name, seg_cols):
+
+    import pandas as pd
+
+    df_list = []
+    for j in seg_cols:
+        seg_counts = df.groupby(j).agg({'Variant_a_performance': ['count'],
+                                        'Variant_b_performance': ['count'],
+                                        'Variant_c_performance': ['count']}).astype('float64').reset_index().droplevel(
+            1, axis=1)
+
+        denom = seg_counts.iloc[:, [1, 2, 3]].sum(axis=1)
+        for i in [1, 2, 3]:
+            seg_counts.iloc[:, i] = seg_counts.iloc[:, i] / denom
+
+        ## Create Tuple
+        seg_name = seg_counts.columns[0]
+        my_tuple_rows = merged_list = [(seg_name, seg) for seg in seg_counts.iloc[:, 0]]
+        my_tuple_columns = [(table_name, 'Variant A'), (table_name, 'Variant B'), (table_name, 'Variant C')]
+
+        final_df = pd.DataFrame(data=seg_counts.iloc[:, [1, 2, 3]].values,
+                                columns=pd.MultiIndex.from_tuples(my_tuple_columns),
+                                index=pd.MultiIndex.from_tuples(my_tuple_rows))
+
+        df_list.append(final_df)
+
+    concat_df = pd.concat(df_list)
+    return concat_df
