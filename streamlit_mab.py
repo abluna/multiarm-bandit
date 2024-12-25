@@ -298,8 +298,8 @@ if st.button('Run Simulation'):
                                          use_container_width=True,
                                          column_config = {
                                              "Optimized": st.column_config.NumberColumn(
-                                                 "Optimized",
-                                                 help="The price of the product in USD"
-                                                 format="$%d"
-                                             )
+                                             "Optimized",
+                                             help="The price of the product in USD",
+                                             format="$%d"
+                                            }
                                          )
