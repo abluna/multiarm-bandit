@@ -20,7 +20,8 @@ warnings.simplefilter("ignore", category=FutureWarning)
 pd.set_option('display.max_columns', None)
 
 st.markdown("<h2 style='text-align: center; color: grey;'>Multi-Armed Bandit Campaign Simulator</h2>", unsafe_allow_html=True)
-st.markdown(":gray[placeholder text placeholder text placeholder text placeholder text placeholder text placeholder text placeholder text placeholder text placeholder text]")
+st.markdown(":gray[This simulation will simulate 100K ***clicks*** in each round. In the first round, the variants will be randomly assigned across all cohorts (see Variant Assignment tab). And after each round, it will determine the right variant to each user based on their characteristics (e.g., income, age, geographic region, etc), and this user base will be labeled the 'optimized audience'. Each round, if ***it gets it right*** it will increase the size of the optimized audience.]")
+st.markdown(":gray[This simulation makes assumptions such as cost of variant or cost of switching variant to a user.]")
 
 
 with st.sidebar:
