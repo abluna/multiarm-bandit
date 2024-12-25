@@ -73,9 +73,9 @@ with st.sidebar:
 ## Parameters for simulation
 steps = 50
 
-include_variant_chart = data_df.loc[data_df['Show']=="Performance by Variant", 'Include'].values
-include_variant_uplift = data_df.loc[data_df['Show']=="Uplift by Variant", 'Include'].values
-include_cohort_tables = data_df.loc[data_df['Show']=="Variant Assignment by Cohort", 'Include'].values
+include_variant_chart = data_df.loc[data_df['Show']=="Performance by Variant", 'Include'].values == True
+include_variant_uplift = data_df.loc[data_df['Show']=="Uplift by Variant", 'Include'].values == True
+include_cohort_tables = data_df.loc[data_df['Show']=="Variant Assignment by Cohort", 'Include'].values == True
 
 if include_cohort_tables:
     tab1, tab2 = st.tabs(["Optimization Charts", "Variant Assignment"])
