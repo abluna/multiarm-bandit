@@ -74,7 +74,7 @@ with st.sidebar:
 steps = 50
 
 if include_cohort_tables:
-    tab1, tab2 = st.tabs(["Optimization Charts", "Variant Assignment", "Further Reading"])
+    tab1, tab2, tab3 = st.tabs(["Optimization Charts", "Variant Assignment", "Further Reading"])
     with tab2:
         placeholder = st.empty()
 else:
