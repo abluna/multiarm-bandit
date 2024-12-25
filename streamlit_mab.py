@@ -78,7 +78,7 @@ if include_cohort_tables:
     with tab2:
         placeholder = st.empty()
 else:
-    tab1 = st.tabs(["Charts", "Further Reading"])
+    tab1, tab3 = st.tabs(["Charts", "Further Reading"])
 
 if st.button('Run Simulation'):
     with st.spinner('Running Simulation...'):
