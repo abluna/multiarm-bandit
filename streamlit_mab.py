@@ -296,9 +296,10 @@ if st.button('Run Simulation'):
                             st.write(curr_message)
 
                             ## Make a couple style changes
-                            curr_table = curr_table.style.format('{:,.0%}').background_gradient(cmap='Blues').set_properties(**{'text-align': 'center'})
+                            curr_table = curr_table.style.format('{:,.0%}').background_gradient(cmap='Blues', axis = None,).set_properties(**{'text-align': 'center'})
 
+                            st.write(curr_table.to_html(), unsafe_allow_html=True)
 
-                            st.dataframe(curr_table,
-                                         height=650,
-                                         use_container_width=True)
+                            #st.dataframe(curr_table,
+                            #             height=650,
+                            #             use_container_width=True)
