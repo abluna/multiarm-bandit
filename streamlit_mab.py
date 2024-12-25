@@ -64,6 +64,10 @@ with st.sidebar:
     include_cohort_tables = data_df.loc[data_df['Show'] == "Variant Assignment by Cohort"]['Include']
 
     st.write(include_variant_chart)
+    st.write(include_variant_uplift)
+    st.write(include_cohort_tables)
+
+
 
     st.divider()
 
