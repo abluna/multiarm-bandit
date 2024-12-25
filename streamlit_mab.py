@@ -296,13 +296,13 @@ if st.button('Run Simulation'):
                             st.write(curr_message)
 
                             ## Make a couple style changes
-                        curr_table = curr_table.style.format('{:,.0%}').background_gradient(cmap='Blues', axis = None).set_properties(**{'text-align': 'center', 'font-size': '12pt'}
-                                                                                                                                      ).set_table_styles([{'selector': 'th',
-                                                                                                                                                            'props': [
-                                                                                                                                                                ('text-align', 'center')
-                                                                                                                                                            ]}])
+                            curr_table = curr_table.style.format('{:,.0%}').background_gradient(cmap='Blues', axis = None).set_properties(**{'text-align': 'center', 'font-size': '12pt'}
+                                                                                                                                          ).set_table_styles([{'selector': 'th',
+                                                                                                                                                                'props': [
+                                                                                                                                                                    ('text-align', 'center')
+                                                                                                                                                                ]}])
 
-                        st.write(curr_table.to_html(), unsafe_allow_html=True)
+                            st.write(curr_table.to_html(), unsafe_allow_html=True)
 
                             #st.dataframe(curr_table,
                             #             height=650,
