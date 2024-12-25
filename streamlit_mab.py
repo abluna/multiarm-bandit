@@ -101,6 +101,9 @@ if st.button('Run Simulation'):
                                               all_combos_weights=combo_weights,
                                               print_diagnostics=False)
 
+## For Variant Assignment Table
+placeholder = st.empty()
+
         for i in range(steps):
 
             if i == 0:
@@ -288,7 +291,7 @@ if st.button('Run Simulation'):
                         opt_table = mab.get_variant_assignment_counts(df = Segment_df_step2[Segment_df_step2['target_control'] != 'target_opt'], table_name='Organic', seg_cols=seg_cols)
                         curr_table = pd.concat([org_table, opt_table], axis =1 )
 
-                        with st.empty():
+                        with placeholder.container():
                             curr_message = "On iteration " + str(i+1) + " out of " + str(steps)
                             st.write(curr_message)
-                            st.dataframe(curr_table, height=1000)
+                            st.dataframe(curr_table, height=650)
