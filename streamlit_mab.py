@@ -47,21 +47,21 @@ with st.sidebar:
         }
     )
 
-    st.data_editor(
-        data_df,
-        column_config={
-            "Include": st.column_config.CheckboxColumn(
-                "Include",
-                help="Check if you want to see this output",
-                default=True,
-            )
-        },
-        hide_index=True,
-    )
+    parameters_df = st.data_editor(
+                                    data_df,
+                                    column_config={
+                                        "Include": st.column_config.CheckboxColumn(
+                                            "Include",
+                                            help="Check if you want to see this output",
+                                            default=True,
+                                        )
+                                    },
+                                    hide_index=True,
+                                )
 
-    include_variant_chart = data_df.loc[data_df['Show'] == "Performance by Variant"]['Include']
-    include_variant_uplift = data_df.loc[data_df['Show'] == "Uplift by Variant"]['Include']
-    include_cohort_tables = data_df.loc[data_df['Show'] == "Variant Assignment by Cohort"]['Include']
+    include_variant_chart = parameters_df.loc[parameters_df['Show'] == "Performance by Variant"]['Include']
+    include_variant_uplift = parameters_df.loc[parameters_df['Show'] == "Uplift by Variant"]['Include']
+    include_cohort_tables = parameters_df.loc[parameters_df['Show'] == "Variant Assignment by Cohort"]['Include']
 
     st.write(include_variant_chart)
     st.write(include_variant_uplift)
