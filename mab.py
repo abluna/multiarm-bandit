@@ -129,9 +129,9 @@ def create_synthetic_sample(row_count=10000):
         ]
 
     income_names = [
-                'Low Income',
-                'Medium Income',
-                'High Income',
+                'Low',
+                'Medium',
+                'High',
                 ]
 
     buyer_condition = [
@@ -141,7 +141,7 @@ def create_synthetic_sample(row_count=10000):
 
     buyer_names = [
                 'Prior Buyer',
-                'First-Time Buyer',
+                'First-Time',
                 ]
 
     region_condition = [

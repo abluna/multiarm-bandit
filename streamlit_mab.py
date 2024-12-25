@@ -88,8 +88,8 @@ if st.button('Run Simulation'):
 
         segments = ["Male", "Female",
                     "Young", "Middle Age", "Older",
-                    "Low Income", "Medium Income", "High Income",
-                    "Prior Buyer", "First-Time Buyer",
+                    "Low", "Medium", "High",
+                    "Prior Buyer", "First-Time",
                     "North", "West", "South", "East",
                     "Urban", "Suburban",
                     "Non-Parent", "Parent"]
