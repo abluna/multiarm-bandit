@@ -299,7 +299,8 @@ if st.button('Run Simulation'):
                             curr_table = curr_table.style.format('{:,.0%}').background_gradient(cmap='Blues', axis = None).set_properties(**{'text-align': 'center', 'font-size': '12pt'}
                                                                                                                                           ).set_table_styles([{'selector': 'th',
                                                                                                                                                                 'props': [
-                                                                                                                                                                    ('text-align', 'center')
+                                                                                                                                                                    ('text-align', 'center'),
+                                                                                                                                                                    ('font-size','10pt')
                                                                                                                                                                 ]}])
 
                             st.write(curr_table.to_html(), unsafe_allow_html=True)
