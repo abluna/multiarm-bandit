@@ -71,6 +71,8 @@ include_cohort_tables = True
 
 if include_cohort_tables:
     tab1, tab2 = st.tabs(["Optimization Charts", "Variant Assignment"])
+    with tab2:
+        placeholder = st.empty()
 else:
     tab1 = st.tabs(["Charts"])
 
@@ -100,9 +102,6 @@ if st.button('Run Simulation'):
                                               segments=segments,
                                               all_combos_weights=combo_weights,
                                               print_diagnostics=False)
-
-## For Variant Assignment Table
-placeholder = st.empty()
 
         for i in range(steps):
 
