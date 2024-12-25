@@ -34,12 +34,12 @@ with st.sidebar:
 
     if opt_method == "Best Variant Assignment":
         optimization_method = 'max'
-    if opt_method == "Best Variant Assignment":
+    if opt_method == "Probabilistic Assignment":
         optimization_method = 'prob'
 
     st.divider()
 
-    learn_rate = st.slider("Optimization Rate", 1, 100, 50, label_visibility="visible", help='The higher the value, the faster the optimization occurs, but the chances of truly optimizing is lower')
+    learn_rate = st.slider("Optimization Rate", 1, 100, 50, label_visibility="visible", help='The higher the value, the faster the optimization occurs, but the chances of truly optimizing are lower')
     learn_rate = (learn_rate + 50) / 100
     st.divider()
 
