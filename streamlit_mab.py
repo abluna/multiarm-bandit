@@ -59,9 +59,9 @@ with st.sidebar:
                                     hide_index=True,
                                 )
 
-    include_variant_chart = parameters_df.loc[parameters_df['Show'] == "Performance by Variant"]['Include']
-    include_variant_uplift = parameters_df.loc[parameters_df['Show'] == "Uplift by Variant"]['Include']
-    include_cohort_tables = parameters_df.loc[parameters_df['Show'] == "Variant Assignment by Cohort"]['Include']
+    include_variant_chart = parameters_df.loc[parameters_df['Show'] == "Performance by Variant"]['Include'].values
+    include_variant_uplift = parameters_df.loc[parameters_df['Show'] == "Uplift by Variant"]['Include'].values
+    include_cohort_tables = parameters_df.loc[parameters_df['Show'] == "Variant Assignment by Cohort"]['Include'].values
 
     st.write(include_variant_chart)
     st.write(include_variant_uplift)
