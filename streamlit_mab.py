@@ -294,7 +294,13 @@ if st.button('Run Simulation'):
                             curr_message = "On iteration " + str(i+1) + " out of " + str(steps)
                             st.write(curr_message)
 
-                            st.dataframe(curr_table.style.format('{:,.0%}'),
-                                         height=650,
-                                         use_container_width=True
-                                         )
+                            ## Make a couple style changes
+                            curr_table = curr_table.style.format('{:,.0%}')
+                            curr_table = curr_table.style.set_properties(**{
+                                #"background-color": "white",
+                                #"color": "black",
+                                #"border-color": "black",
+                                'text-align': 'center'
+                            })
+
+                            st.write(curr_table.to_html(), unsafe_allow_html=True)
