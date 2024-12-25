@@ -74,11 +74,11 @@ with st.sidebar:
 steps = 50
 
 if include_cohort_tables:
-    tab1, tab2 = st.tabs(["Optimization Charts", "Variant Assignment"])
+    tab1, tab2 = st.tabs(["Optimization Charts", "Variant Assignment", "Further Reading"])
     with tab2:
         placeholder = st.empty()
 else:
-    tab1 = st.tabs(["Charts"])
+    tab1 = st.tabs(["Charts", "Further Reading"])
 
 if st.button('Run Simulation'):
     with st.spinner('Running Simulation...'):
