@@ -274,6 +274,7 @@ if st.button('Run Simulation'):
                 my_chart.add_rows(new_data)
 
                 if include_variant_chart:
+
                     new_chart_data_variant = pd.DataFrame({'Metric': ['Variant A', 'Variant A', 'Variant B', 'Variant B', 'Variant C', 'Variant C'],
                                                            'Type':['Organic', 'Organic + Optimized', 'Organic', 'Organic + Optimized','Organic', 'Organic + Optimized'],
                                                            'itr': [i+1,i+1,i+1,i+1,i+1,i+1],
