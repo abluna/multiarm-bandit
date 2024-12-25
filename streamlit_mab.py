@@ -63,9 +63,8 @@ with st.sidebar:
     include_variant_uplift = parameters_df.loc[parameters_df['Show'] == "Uplift by Variant"]['Include'].values
     include_cohort_tables = parameters_df.loc[parameters_df['Show'] == "Variant Assignment by Cohort"]['Include'].values
 
-    st.write(include_variant_chart==True)
-    st.write(include_variant_uplift==True)
-    st.write(include_cohort_tables==True)
+    if include_variant_chart:
+        st.write("It's True")
 
 
 
