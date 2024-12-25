@@ -5,7 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ddea51f1-ef07-4f67-8b86-2fd98e7fbf2e" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/streamlit_mab.py" beforeDir="false" afterPath="$PROJECT_DIR$/streamlit_mab.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.name" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Synthetic Data.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Synthetic Data.ipynb" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
