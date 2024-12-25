@@ -298,6 +298,6 @@ if st.button('Run Simulation'):
                             curr_table = curr_table.style.format('{:,.0%}')
                             curr_table = curr_table.style.background_gradient(cmap='Blues')
 
-                            st.dataframe(curr_table
+                            st.dataframe(curr_table,
                                          height=650,
                                          use_container_width=True)
