@@ -1,4 +1,5 @@
 streamlit==1.41.0
 pandas==2.2.3
 numpy==2.2.0
+matplotlib
 huggingface_hub
