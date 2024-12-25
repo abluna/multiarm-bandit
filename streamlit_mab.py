@@ -293,4 +293,13 @@ if st.button('Run Simulation'):
                         with placeholder.container():
                             curr_message = "On iteration " + str(i+1) + " out of " + str(steps)
                             st.write(curr_message)
-                            st.dataframe(curr_table, height=650)
+                            st.dataframe(curr_table,
+                                         height=650,
+                                         use_container_width=True,
+                                         column_config = {
+                                             "Optimized": st.column_config.NumberColumn(
+                                                 "Optimized,
+                                                 help="The price of the product in USD"
+                                                 format="$%d"
+                                             )
+                                         )
