@@ -320,8 +320,8 @@ def create_all_combo_weights():
     
     df = pd.DataFrame({'gender': ["Male", "Female",np.nan,np.nan] ,
                        'age': ["Young", "Middle Age", "Older",np.nan],
-                       'income': ["Low Income", "Medium Income", "High Income",np.nan],
-                       'buyer': ["Prior Buyer", "First-Time Buyer",np.nan,np.nan],
+                       'income': ["Low", "Medium", "High",np.nan],
+                       'buyer': ["Prior Buyer", "First-Time",np.nan,np.nan],
                        'region': ["North", "West", "South", "East"],
                        'area': ["Urban", "Suburban",np.nan,np.nan],
                        'parent': ["Non-Parent", "Parent",np.nan,np.nan]})
