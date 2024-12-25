@@ -294,7 +294,7 @@ if st.button('Run Simulation'):
                             curr_message = "On iteration " + str(i+1) + " out of " + str(steps)
                             st.write(curr_message)
 
-                            st.dataframe(curr_message.style.format('{:,.0%}'),
+                            st.dataframe(curr_table.style.format('{:,.0%}'),
                                          height=650,
                                          use_container_width=True
                                          )
