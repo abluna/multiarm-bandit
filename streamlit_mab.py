@@ -295,8 +295,7 @@ if st.button('Run Simulation'):
                             st.write(curr_message)
 
                             ## Make a couple style changes
-                            curr_table = curr_table.style.format('{:,.0%}')
-                            curr_table = curr_table.style.background_gradient(cmap='Blues')
+                            curr_table = curr_table.style.format('{:,.0%}').background_gradient(cmap='Blues')
 
                             st.dataframe(curr_table,
                                          height=650,
