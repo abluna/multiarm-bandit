@@ -44,7 +44,7 @@ with st.sidebar:
     data_df = pd.DataFrame(
         {
             "Show": ["Performance by Variant", "Uplift by Variant", "Variant Assignment by Cohort"],
-            "Include": [True, False, False],
+            "Include": [True, True, True],
         }
     )
 
@@ -62,13 +62,12 @@ with st.sidebar:
 
     st.divider()
 
-
-
 ## Parameters for simulation
 steps = 50
-include_variant_chart = True
-include_variant_uplift = True
-include_cohort_tables = True
+
+include_variant_chart = data_df.loc[data_df['Show']=="Performance by Variant", 'Include'].value
+include_variant_uplift = data_df.loc[data_df['Show']=="Uplift by Variant", 'Include'].value
+include_cohort_tables = data_df.loc[data_df['Show']=="Variant Assignment by Cohort", 'Include'].value
 
 if include_cohort_tables:
     tab1, tab2 = st.tabs(["Optimization Charts", "Variant Assignment"])
@@ -196,7 +195,7 @@ if st.button('Run Simulation'):
                         line_chart_uplift = alt.Chart(chart_data_uplift).mark_line(
                                                     ).encode(
                                                     alt.X('itr:N', scale=alt.Scale(domain=list(range(0,51))), title="Round"),
-                                                    alt.Y('Value:Q',scale=alt.Scale(domainMin=0), title = 'Performance').axis(format='+%'),
+                                                    alt.Y('Value:Q',scale=alt.Scale(domainMin=0), title = '% Uplift').axis(format='+%'),
                                                     alt.Color('Metric:N',
                                                              legend=alt.Legend(title="Variant", titleFontSize=16))
                                                     ).properties(
@@ -224,7 +223,7 @@ if st.button('Run Simulation'):
             if i > 0:
 
                 Segment_df_step2 = mab.create_synthetic_sample(row_count=row_count)
-                Segment_df_step2 = mab.assignment_with_optimization(df=Segment_df_step2, prior_performance_scores=perf_scores_all_interactions,seg_cols=seg_cols,method='max', opt_target_size=i/100, learning_weight=2)
+                Segment_df_step2 = mab.assignment_with_optimization(df=Segment_df_step2, prior_performance_scores=perf_scores_all_interactions,seg_cols=seg_cols,method='max', opt_target_size=learn_rate, learning_weight=2)
                 Segment_df_step2 = mab.add_conversion_rates(df=Segment_df_step2, seg_cols=seg_cols, segments=segments, all_combos_weights=combo_weights, print_diagnostics=False, assign_variant=False)
                 Segment_df_step2 = Segment_df_step2.reset_index(drop=True)
 
@@ -288,10 +287,11 @@ if st.button('Run Simulation'):
                     if include_cohort_tables:
 
                         org_table = mab.get_variant_assignment_counts(df = Segment_df_step2[Segment_df_step2['target_control'] == 'target_org'], table_name='Organic', seg_cols=seg_cols)
-                        opt_table = mab.get_variant_assignment_counts(df = Segment_df_step2[Segment_df_step2['target_control'] != 'control'], table_name='Optimized', seg_cols=seg_cols)
+                        opt_table = mab.get_variant_assignment_counts(df = Segment_df_step2[Segment_df_step2['target_control'] == 'target_opt'], table_name='Optimized', seg_cols=seg_cols)
                         curr_table = pd.concat([org_table, opt_table], axis =1)
 
                         with placeholder.container():
+
                             curr_message = "On iteration " + str(i+1) + " out of " + str(steps)
                             st.write(curr_message)
 
