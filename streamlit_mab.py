@@ -78,7 +78,7 @@ else:
 if st.button('Run Simulation'):
     with st.spinner('Running Simulation...'):
 
-        row_count = 100000
+        row_count = 200000
         seg_cols = ['gender', 'age',
                     'income', 'buyer',
                     'region', 'area',
