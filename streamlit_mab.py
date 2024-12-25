@@ -22,6 +22,7 @@ pd.set_option('display.max_columns', None)
 st.markdown("<h2 style='text-align: center; color: grey;'>Multi-Armed Bandit Campaign Simulator</h2>", unsafe_allow_html=True)
 st.markdown(":gray[This simulation will simulate 100K ***clicks*** in each round. In the first round, the variants will be randomly assigned across all cohorts (see Variant Assignment tab). And after each round, it will determine the right variant to each user based on their characteristics (e.g., income, age, geographic region, etc), and this user base will be labeled the 'optimized audience'. Each round, if ***it gets it right*** it will increase the size of the optimized audience.]")
 st.markdown(":gray[This simulation makes assumptions such as cost of variant or cost of switching variant to a user.]")
+st.markdown(":gray[The charts below show the performance of an optimized variant assignment vs random assignment--both across all users and for each variant.]")
 
 
 with st.sidebar:
@@ -299,6 +300,7 @@ if st.button('Run Simulation'):
                         curr_table = pd.concat([org_table, opt_table], axis =1)
 
                         with placeholder.container():
+                            st.markdown(":gray[This table shows the composition of variant assignment across key demographics. After all, this approach seeks to assign the best performing variant to the right audience. And this output demonstrates how each demographic reacts (positively and negatively) to a campaign]")
 
                             curr_message = "On iteration " + str(i+1) + " out of " + str(steps)
                             st.write(curr_message)
