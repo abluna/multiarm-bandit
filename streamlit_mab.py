@@ -6,6 +6,7 @@ import sys
 import itertools
 import altair as alt
 import time
+import matplotlib
 
 ##################################################
 ## Parameters:                                  ##
