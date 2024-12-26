@@ -83,7 +83,7 @@ else:
     tab1, tab3 = st.tabs(["Charts", "Further Reading"])
 
 if st.button('Run Simulation'):
-    with st.spinner('Running Simulation...'):
+    with st.spinner('Running 50-Round simulation (takes about 10 second per round)...'):
 
         row_count = 150000
         seg_cols = ['gender', 'age',
