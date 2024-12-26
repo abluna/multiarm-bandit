@@ -102,12 +102,6 @@ if st.button('Run Simulation'):
         combo_weights = mab.create_all_combo_weights()
         Segment_df = mab.create_synthetic_sample(row_count=row_count)
 
-        ## Full random assignment for Variant
-        Segment_df = mab.add_conversion_rates(df=Segment_df,
-                                              seg_cols=seg_cols,
-                                              segments=segments,
-                                              all_combos_weights=combo_weights,
-                                              print_diagnostics=False)
 
         for i in range(steps):
 
