@@ -102,7 +102,6 @@ if st.button('Run Simulation'):
         combo_weights = mab.create_all_combo_weights()
         Segment_df = mab.create_synthetic_sample(row_count=row_count)
 
-
         for i in range(steps):
 
             if i == 0:
