@@ -280,6 +280,7 @@ def assignment_with_optimization(df, prior_performance_scores=None,seg_cols=None
         cols_for_concat = ['gender', 'age', 'income', 'buyer', 'region', 'area', 'parent','variant_assignment','target_control']
         
     if method=='max':
+
         ## Turn it into a share
         variant_col_names = ['Variant_a_performance','Variant_b_performance','Variant_c_performance']
         Segment_df_step2_target_opt[variant_col_names] = Segment_df_step2_target_opt[variant_col_names] ** learning_weight
