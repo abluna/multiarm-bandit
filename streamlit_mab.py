@@ -140,9 +140,6 @@ if st.button('Run Simulation'):
                                                'itr': [1,1],
                                                'Value': [org_target_performance, overall_target_performance]})
 
-                    curr_message = "On iteration " + str(i + 1) + " out of " + str(steps) + "..."
-                    st.write(curr_message)
-
                     line_chart = alt.Chart(chart_data, title="Performance by Target Audience").mark_line(
                                     point=alt.OverlayMarkDef(filled=True, size=15)
                                     ).encode(
