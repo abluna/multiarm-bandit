@@ -1,5 +1,5 @@
 def mab_test():
-    return 'Good - Abraham'
+    return 'Poop'
 
 def get_pd_weights(segments):
 
